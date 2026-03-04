@@ -33,7 +33,7 @@ const Gallery = () => {
         observerRef.current.disconnect();
       }
     };
-  }); // Empty dependency array - observer only created once
+  }, []); // Empty dependency array - observer only created once
 
   // Handle image load completion
   const handleImageLoad = useCallback((index) => {
