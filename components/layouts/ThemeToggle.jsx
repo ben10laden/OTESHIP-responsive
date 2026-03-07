@@ -14,7 +14,7 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="relative w-8 h-8 p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-(--color-secondary) transition-colors duration-200 overflow-hidden cursor-pointer"
+      className="relative lg:w-8 lg:h-8 md:w-4 md:h-4 p-1.5 lg:inline-block md:inline-block sm:hidden hidden rounded-full hover:bg-gray-100 dark:hover:bg-(--color-secondary) transition-colors duration-200 overflow-hidden cursor-pointer"
       style={{ lineHeight: 0 }}
       onClick={handleToggle}
       aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}

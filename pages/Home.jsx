@@ -14,8 +14,8 @@ export default function Home() {
       <GoalsSection />
       <SchoolsSection />
       <CeramicsSection />
-      <OpportunitiesSection />
-      <ContactSection />
+      {/*<OpportunitiesSection />
+      <ContactSection /> */}
     </div>
   );
 }

@@ -49,48 +49,43 @@ export default function Navbar() {
     languages.find((lang) => lang.code === i18n.language) || languages[0];
 
   return (
-    <nav className="bg-white dark:bg-(--color-bg-dark) p-2.5 px-32 flex items-center drop-shadow-sm sticky top-0 z-10 transition-colors duration-200">
+    <nav className="bg-white dark:bg-(--color-bg-dark) p-2.5 px-4 sm:px-8 md:px-16 lg:px-32 flex items-center drop-shadow-sm sticky top-0 z-10 transition-colors duration-200">
       {/* Left Section */}
-      <div className="flex flex-col flex-1">
-        <Link to="/" className="max-w-fit">
-          <div className="flex flex-row space-x-2 items-center pb-2">
+      <div className="flex flex-col shrink-0 justify-start max-w-fit">
+        <Link to="/">
+          <div className="flex flex-row space-x-0.5 sm:space-x-1 md:space-x-1.5 lg:space-x-2 items-center pb-0 sm:pb-0 md:pb-1 lg:pb-2">
             <img
               src="/logos/oteship.png"
               alt="IKY"
-              className="h-[2em] w-auto inline-block"
-              style={{ fontSize: "1rem" }}
+              className="lg:h-[2em] md:h-[1.5em] sm:h-[1em] h-[0.75em] w-auto inline-block"
             />
-            <h1 className="text-2xl font-bold text-(--color-primary) dark:text-(--color-primary2)">
+            <h1 className="lg:text-2xl md:text-xl sm:text-lg text-base font-bold text-(--color-primary) dark:text-(--color-primary2)">
               OTESHIP
             </h1>
           </div>
-          <div className="flex flex-row space-x-2">
-            <span className="fi fi-eu text-base"></span>
+          <div className="flex flex-row items-center space-x-0.5 sm:space-x-1 md:space-x-1.5 lg:space-x-2">
+            <span className="fi fi-eu lg:h-[1em] md:h-[0.85em] sm:h-[0.75em] h-[0.65em]"></span>
             <img
               src="/logos/IKY.png"
               alt="IKY"
-              className="h-[1em] w-auto inline-block"
-              style={{ fontSize: "1rem" }}
+              className="lg:h-[1em] md:h-[0.85em] sm:h-[0.75em] h-[0.65em] w-auto inline-block"
             />
             <img
               src="/logos/eeeek.png"
               alt="EEEEK"
-              className="h-[1em] w-auto inline-block"
-              style={{ fontSize: "1rem" }}
+              className="lg:h-[1em] md:h-[0.85em] sm:h-[0.75em] h-[0.65em] w-auto inline-block"
             />
             <img
               src="/logos/poland.png"
               alt="IKY"
-              className="h-[1em] w-auto inline-block"
-              style={{ fontSize: "1rem" }}
+              className="lg:h-[1em] md:h-[0.85em] sm:h-[0.75em] h-[0.65em] w-auto inline-block"
             />
             <img
               src="/logos/turkey.png"
               alt="IKY"
-              className="h-[1em] w-auto inline-block"
-              style={{ fontSize: "1rem" }}
+              className="lg:h-[1em] md:h-[0.85em] sm:h-[0.75em] h-[0.65em] w-auto inline-block"
             />
-            <h2 className="text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary)">
+            <h2 className="lg:text-xs md:text-[10px] sm:text-[8px] text-[6px] text-(--color-bg-dark) dark:text-(--color-bg-primary)">
               Erasmus+
             </h2>
           </div>
@@ -98,7 +93,7 @@ export default function Navbar() {
       </div>
 
       {/* Center Section */}
-      <div className="[--hover-color:#aeaeae] min-w-fit dark:[--hover-color:#aeaeaebd] text-base font-medium flex-1 text-center space-x-12 text-(--color-dark-text) dark:text-white">
+      <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 static md:static hidden lg:flex md:flex sm:hidden justify-center lg:text-base md:text-sm lg:space-x-12 md:space-x-4 font-medium flex-1 min-w-fit text-center [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd] text-(--color-dark-text) dark:text-white">
         <Link to="/" className="hover-anim">
           {t("navbar.home")}
         </Link>
@@ -117,21 +112,20 @@ export default function Navbar() {
       </div>
 
       {/* Right Section */}
-      <div className="flex flex-row justify-end items-center flex-1 space-x-2.5">
+      <div className="flex flex-row justify-end items-center space-x-2.5 flex-1 max-w-none lg:flex-1 md:flex-0 lg:max-w-none md:max-w-fit">
         <ThemeToggle />
-        {/* Language Dropdown */}
+
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={toggleLanguageDropdown}
-            className="bg-gray-100 dark:bg-(--color-dark2-text) px-3.5 py-1.5 border border-gray-300 dark:border-gray-500 rounded-md cursor-pointer flex flex-row justify-center items-center space-x-2 hover:bg-gray-200 dark:hover:bg-black/40 transition-all duration-200 w-20"
+            className="lg:flex md:flex sm:hidden hidden lg:w-20 md:w-15 lg:space-x-2 md:space-x-1.5 lg:px-3.5 md:px-2.5 lg:py-1.5 md:py-1 bg-gray-100 dark:bg-(--color-dark2-text) border border-gray-300 dark:border-gray-500 rounded-md cursor-pointer flex-row justify-center items-center hover:bg-gray-200 dark:hover:bg-black/40 transition-all duration-200"
           >
-            <h1 className="font-light text-sm uppercase tracking-wide dark:text-white">
+            <h1 className="font-light lg:inline-block md:inline-block lg:text-sm md:text-xs uppercase tracking-wide dark:text-white">
               {currentLanguage.code}
             </h1>
             <span className={`fi fi-${currentLanguage.flag} text-sm`}></span>
           </button>
 
-          {/* Dropdown Menu with Animations */}
           <div
             className={`absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-(--color-bg-dark) shadow-lg ring-1 ring-gray-300 dark:ring-gray-500 ring-opacity-5 focus:outline-none z-50 transition-all duration-200 ease-out ${
               isLanguageOpen
