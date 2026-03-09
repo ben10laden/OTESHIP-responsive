@@ -18,7 +18,7 @@ const GoalsSection = () => {
           description={t("goals.description")}
         />
 
-        <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-5 lg:gap-6 xl:gap-8 max-w-7xl">
+        <div className="flex flex-col md:flex-row items-stretch justify-center gap-3 xs:gap-4 md:gap-5 lg:gap-6 xl:gap-8 max-w-7xl">
           <div className="flex flex-col justify-evenly flex-1 gap-4 md:gap-6 lg:gap-7 xl:gap-8">
             {goalsData.goals.map((goal, index) => (
               <div

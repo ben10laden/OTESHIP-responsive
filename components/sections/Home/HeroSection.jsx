@@ -25,7 +25,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center justify-center pt-4 gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5 xl:gap-4">
           <Link
             to="/ceramics"
-            className="cursor-pointer text-xs sm:text-sm lg:text-base py-2 xs:py-2.5 sm:py-3 md:py-3 px-3.5 xs:px-4 sm:px-4.5 md:px-5 lg:px-5.5 xl:px-6 bg-white text-[#2E5D9E] font-semibold border-2 border-transparent rounded-md hover:bg-transparent hover:text-white hover:border-white transition-all duration-300 whitespace-nowrap text-center"
+            className="cursor-pointer text-xs sm:text-sm lg:text-base py-2 xs:py-2.5 sm:py-3 px-3.5 xs:px-4 sm:px-4.5 md:px-5 lg:px-5.5 xl:px-6 bg-white text-[#2E5D9E] font-semibold border-2 border-transparent rounded-md hover:bg-transparent hover:text-white hover:border-white transition-all duration-300 whitespace-nowrap text-center"
           >
             {t("hero.viewCeramics")}
           </Link>

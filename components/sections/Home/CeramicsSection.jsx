@@ -17,7 +17,7 @@ const CeramicsSection = () => {
         />
 
         {/* Added md:max-w-[80%] and lg:max-w-7xl here */}
-        <div className="flex flex-col sm:grid sm:grid-cols-4 lg:flex lg:flex-row items-stretch justify-center gap-4 md:gap-5 lg:gap-6 xl:gap-8 w-full max-w-7xl md:max-w-[80%] lg:max-w-7xl">
+        <div className="flex flex-col sm:grid sm:grid-cols-4 lg:flex lg:flex-row items-stretch justify-center gap-3 xs:gap-4 md:gap-5 lg:gap-6 xl:gap-8 w-full max-w-7xl md:max-w-[80%] lg:max-w-7xl">
           {ceramicsCardsData.map((card, index) => (
             <div
               key={index}
