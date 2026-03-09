@@ -62,7 +62,7 @@ export default function Footer() {
               {t("footer.copyright", { year: new Date().getFullYear() })}
             </p>
           </div>
-          <p className="text-[10px] md:text-xs text-(--color-light3-text) font-mono bg-white/5 px-2 py-1 rounded-sm">
+          <p className="text-[10px] md:text-xs text-(--color-light3-text) font-mono bg-white/5 dark:bg-white/10 px-2 py-1 rounded-sm">
             {t("footer.projectNumber", { number: projectNumber })}
           </p>
         </div>
