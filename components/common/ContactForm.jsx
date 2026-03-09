@@ -6,7 +6,8 @@ const ContactForm = () => {
 
   return (
     <div
-      data-aos="fade-up"
+      data-aos="fade-down"
+      data-aos-delay="400"
       className="bg-white dark:bg-(--color-dark2-text) rounded-md p-5 xs:p-6 md:p-8 shadow-md transition-colors duration-200 w-full"
     >
       <h2 className="text-sm md:text-base lg:text-lg font-bold text-(--color-dark-text) dark:text-white mb-6">
@@ -38,7 +39,7 @@ const ContactForm = () => {
           />
         </div>
 
-        {/* Input Group: Phone (Restored) */}
+        {/* Input Group: Phone */}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs md:text-sm font-medium text-(--color-bg-dark) dark:text-(--color-bg-primary)">
             {t("contact.phone")}
@@ -63,7 +64,7 @@ const ContactForm = () => {
           ></textarea>
         </div>
 
-        {/* Button: Matches Hero Styling */}
+        {/* Button */}
         <button
           type="submit"
           className="w-full mt-2 cursor-pointer font-bold rounded-md transition-all duration-300 whitespace-nowrap text-center
