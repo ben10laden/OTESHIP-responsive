@@ -191,36 +191,40 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          ref={hamburgerButtonRef}
-          className="cursor-pointer xs:hidden flex items-center justify-center p-2 rounded-md text-(--color-dark-text) dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            {isMobileMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </button>
+        {/* Mobile Hamburger Button with invisible touch target */}
+        <div className="relative xs:hidden flex items-center justify-center w-10 h-10 shrink-0">
+          <button
+            ref={hamburgerButtonRef}
+            className="peer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-10 cursor-pointer rounded-md focus:outline-none"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          ></button>
+
+          <div className="relative flex items-center justify-center w-full h-full rounded-md text-(--color-dark-text) dark:text-white peer-hover:bg-gray-100 dark:peer-hover:bg-gray-800 transition-colors pointer-events-none">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
@@ -235,7 +239,8 @@ export default function Navbar() {
         <div className="flex flex-col px-6 space-y-6">
           {/* Top: Theme & Language */}
           <div className="flex flex-row justify-between items-center border-b border-gray-200 dark:border-(--color-divider) pb-4">
-            <ThemeToggle />
+            {/* Added variant prop here! */}
+            <ThemeToggle variant="menu" />
 
             <div className="flex space-x-2 bg-[#eceef0] dark:bg-(--color-dark2-text) p-1 rounded-md transition-colors duration-200">
               {languages.map((language) => (
