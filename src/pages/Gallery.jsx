@@ -1,16 +1,36 @@
-// Gallery.jsx - Optimized component with stable rendering
+// Gallery.jsx - Fixed version with proper dynamic imports
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { wsImagesArray } from "../data/Workshops/workshopImages";
+import { loadWorkshopImages } from "../data/Workshops/workshopImages";
 import { useTranslation } from "react-i18next";
 
 const Gallery = () => {
   const { t } = useTranslation("gallery");
   const [loadedImages, setLoadedImages] = useState(new Set());
+  const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const observerRef = useRef(null);
 
-  // Clean up the image loading logic
+  // Load images dynamically
   useEffect(() => {
-    // Create observer once
+    const loadImages = async () => {
+      try {
+        setIsLoading(true);
+        const workshopImages = await loadWorkshopImages();
+        // Extract just the src URLs
+        const imageUrls = workshopImages.map((img) => img.src);
+        setImages(imageUrls);
+      } catch (error) {
+        console.error("Failed to load workshop images:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadImages();
+  }, []);
+
+  // Set up intersection observer for lazy loading
+  useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -18,6 +38,8 @@ const Gallery = () => {
             const index = entry.target.dataset.index;
             if (index && !loadedImages.has(index)) {
               setLoadedImages((prev) => new Set(prev).add(index));
+              // Unobserve after loading to prevent unnecessary calls
+              observerRef.current?.unobserve(entry.target);
             }
           }
         });
@@ -35,12 +57,21 @@ const Gallery = () => {
     };
   }, []); // Empty dependency array - observer only created once
 
-  // Handle image load completion
   const handleImageLoad = useCallback((index) => {
-    // Mark image as fully loaded (you could add a separate state if needed)
     const container = document.querySelector(`[data-index="${index}"]`);
     if (container) {
       container.classList.add("image-fully-loaded");
+    }
+  }, []);
+
+  const handleImageError = useCallback((index, e) => {
+    console.error(`Failed to load image at index ${index}:`, e);
+    // Set a fallback background color instead of broken image
+    const container = document.querySelector(`[data-index="${index}"]`);
+    if (container) {
+      container.style.backgroundColor = "#e5e7eb";
+      container.innerHTML =
+        '<div class="flex items-center justify-center h-full text-gray-400">Image not available</div>';
     }
   }, []);
 
@@ -51,8 +82,22 @@ const Gallery = () => {
     return spanClass;
   };
 
+  if (isLoading) {
+    return (
+      <div className="bg-(--color-bg-primary) w-full">
+        <div className="w-full p-16">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-center items-center min-h-[400px]">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-(--color-bg-primary) dark:bg-(--color-dark-text) transition-colors duration-200 w-full">
+    <div className="bg-(--color-bg-primary) w-full">
       <div className="w-full p-16">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-8 justify-evenly items-center flex-1 w-full">
@@ -65,9 +110,10 @@ const Gallery = () => {
 
             <div className="w-full">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] gap-4 grid-flow-dense">
-                {wsImagesArray.slice(0, 10).map((image, index) => {
+                {images.slice(0, 10).map((image, index) => {
                   const spanClass = getSpanClass(index);
                   const isLoaded = loadedImages.has(String(index));
+                  const imageIndex = String(index);
 
                   const responsiveClasses = `
                     ${index === 8 ? "lg:col-span-2" : ""} 
@@ -81,7 +127,7 @@ const Gallery = () => {
                         if (
                           el &&
                           observerRef.current &&
-                          !loadedImages.has(String(index))
+                          !loadedImages.has(imageIndex)
                         ) {
                           observerRef.current.observe(el);
                         }
@@ -102,6 +148,8 @@ const Gallery = () => {
                           alt={`Gallery image ${index + 1}`}
                           className="absolute inset-0 w-full h-full object-cover"
                           onLoad={() => handleImageLoad(index)}
+                          onError={(e) => handleImageError(index, e)}
+                          loading="lazy"
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse" />
