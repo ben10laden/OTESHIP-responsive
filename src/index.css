@@ -81,11 +81,11 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: clip;
 }
 
 body {
   @apply bg-(--color-dark-text) dark:bg-black transition-colors duration-200;
+  overflow-x: hidden;
 }
 
 .font-size-large {
