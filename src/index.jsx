@@ -46,7 +46,7 @@ export default function Index() {
 
   if (isGuidePage) {
     return (
-      <div className="flex flex-col min-h-screen bg-[#F8FAFC] dark:bg-[#0b101a] overflow-x-hidden">
+      <div className="flex flex-col min-h-screen bg-[#F8FAFC] dark:bg-[#0b101a]">
         <Navbar />
         <ScrollToTopButton />
         <AccessibilityMenu /> {/* Add this */}
@@ -78,7 +78,7 @@ export default function Index() {
 
   // Default layout for all other pages
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <ScrollToTopButton />
       <AccessibilityMenu /> {/* Add this */}
