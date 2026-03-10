@@ -84,8 +84,8 @@ html {
 }
 
 body {
-  @apply bg-(--color-dark-text) dark:bg-black transition-colors duration-200;
   overflow-x: hidden;
+  @apply bg-(--color-dark-text) dark:bg-black transition-colors duration-200;
 }
 
 .font-size-large {
