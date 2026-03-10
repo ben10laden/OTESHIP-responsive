@@ -84,7 +84,6 @@ html {
 }
 
 body {
-  overflow-x: hidden;
   @apply bg-(--color-dark-text) dark:bg-black transition-colors duration-200;
 }
 
