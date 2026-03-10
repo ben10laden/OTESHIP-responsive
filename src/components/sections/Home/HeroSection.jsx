@@ -14,12 +14,12 @@ const HeroSection = () => {
         <h1 className="font-bold text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white">
           {t("hero.title")}
         </h1>
-        <h1 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-center text-(--color-bg-primary)">
+        <h2 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-center text-(--color-bg-primary)">
           {t("hero.subtitle")}
-        </h1>
-        <h1 className="text-xs xs:text-sm md:text-base lg:text-lg xl:text-xl text-(--color-light1-text) text-center max-w-3xl">
+        </h2>
+        <p className="text-xs xs:text-sm md:text-base lg:text-lg xl:text-xl text-(--color-light1-text) text-center max-w-3xl">
           {t("hero.description")}
-        </h1>
+        </p>
 
         {/* Buttons */}
         <div className="flex flex-col items-center justify-center pt-4 gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5 xl:gap-4">

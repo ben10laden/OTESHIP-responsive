@@ -11,9 +11,9 @@ export default function About() {
       <HeroSection />
       <AboutSection />
       <ProcessSection />
-      {/*<ImpactSection />
+      <ImpactSection />
       <SchoolsSection />
-      <FutureSection /> */}
+      <FutureSection />
     </div>
   );
 }

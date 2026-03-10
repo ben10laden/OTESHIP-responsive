@@ -1,25 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLanguageData } from "../../../hooks/useLanguageData";
+import SectionHeader from "../../common/SectionHeader";
 
 const ImpactSection = () => {
   const { impactNumbersData } = useLanguageData();
   const { t } = useTranslation("about");
   return (
     <section
-      className="bg-(--color-bg-primary) dark:bg-(--color-bg-dark) p-20 transition-colors duration-200 scroll-mt-16"
+      className="bg-(--color-bg-primary) dark:bg-(--color-bg-dark) p-8 xs:p-10 md:p-15 lg:p-16 xl:p-20 transition-colors duration-200 scroll-mt-16"
       id="impact"
     >
-      <div className="flex flex-col justify-between items-center gap-12">
-        <div
-          data-aos="fade-up"
-          className="flex flex-col justify-center items-center gap-4"
-        >
-          <h1 className="font-bold text-4xl text-(--color-dark-text) dark:text-white">
-            {t("impact.title")}
-          </h1>
-        </div>
-        <div className="flex flex-row items-center justify-center gap-20 max-w-7xl">
+      <div className="flex flex-col justify-between items-center gap-6 md:gap-8 lg:gap-9 xl:gap-10">
+        <SectionHeader title={t("impact.title")} />
+
+        {/* Updated this single line to handle the grid -> flex switch */}
+        <div className="grid grid-cols-2 w-full xs:flex xs:flex-row items-center justify-center gap-6 xs:gap-8 sm:gap-10 md:gap-12 lg:gap-18 xl:gap-20 max-w-7xl">
           {impactNumbersData.map((item, index) => (
             <div
               key={index}
@@ -27,12 +23,12 @@ const ImpactSection = () => {
               data-aos="fade-down"
               data-aos-delay={300 + index * 150}
             >
-              <h1 className="font-bold text-6xl text-(--color-primary) dark:text-(--color-primary2)">
+              <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-(--color-primary) dark:text-(--color-primary2)">
                 {item.num}
               </h1>
-              <h1 className="uppercase text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
+              <p className="uppercase text-center text-xs md:text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
                 {item.description}
-              </h1>
+              </p>
             </div>
           ))}
         </div>
