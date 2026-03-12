@@ -5,19 +5,24 @@ import {
 } from "../data/Workshops/workshopImages";
 import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/common/SectionHeader";
+import Carousel from "../components/common/Carousel";
 
-const GalleryImage = ({ src, index, onClick }) => {
+const GalleryImage = ({ src, index, onClick, inCarousel = false }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   return (
     <div
       data-index={index}
-      data-aos="fade-down"
-      data-aos-delay={300 + index * 50}
+      data-aos={inCarousel ? "" : "fade-down"}
+      data-aos-delay={inCarousel ? 0 : 300 + index * 50}
       data-aos-offset="0"
       onClick={onClick}
-      className="relative rounded-md overflow-hidden shadow-md cursor-pointer bg-gray-200 dark:bg-gray-800 group w-full xs:w-[calc((100%-0.5rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)]"
+      className={`relative rounded-md overflow-hidden shadow-md cursor-pointer bg-gray-200 dark:bg-gray-800 group ${
+        inCarousel
+          ? "w-full h-full"
+          : "w-full xs:w-[calc((100%-0.5rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)]"
+      }`}
       style={{
         height: "200px",
         contentVisibility: "auto",
@@ -29,21 +34,18 @@ const GalleryImage = ({ src, index, onClick }) => {
       )}
 
       {!hasError ? (
-        <>
-          <img
-            src={src}
-            alt={`Gallery image ${index + 1}`}
-            loading="lazy"
-            decoding="async"
-            className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 ${
-              isLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            fetchPriority={index < 4 ? "high" : "low"}
-            onLoad={() => setIsLoaded(true)}
-            onError={() => setHasError(true)}
-          />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-        </>
+        <img
+          src={src}
+          alt={`Gallery image ${index + 1}`}
+          loading="lazy"
+          decoding="async"
+          className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          fetchPriority={index < 4 ? "high" : "low"}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setHasError(true)}
+        />
       ) : (
         <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800">
           Image not available
@@ -56,7 +58,6 @@ const GalleryImage = ({ src, index, onClick }) => {
 const Gallery = () => {
   const { t } = useTranslation("gallery");
 
-  // States for different image categories
   const [workshopImages, setWorkshopImages] = useState([]);
   const [productImages, setProductImages] = useState({
     gr: [],
@@ -64,31 +65,30 @@ const Gallery = () => {
     tr: [],
   });
 
-  // Lightbox states
-  const [activeImages, setActiveImages] = useState([]); // Tells the lightbox which array to cycle through
+  const [activeImages, setActiveImages] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [slideDirection, setSlideDirection] = useState("");
+
+  const [isLightboxLoading, setIsLightboxLoading] = useState(true);
+  // NEW: State to control delayed spinner visibility
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const minSwipeDistance = 50;
 
   const localizedCountries = t("gallery.countries", { returnObjects: true });
-
   const countryCodes = ["gr", "pl", "tr"];
-
   const countries = countryCodes.map((code, index) => ({
     code: code,
-    name: localizedCountries[index], // Maps "gr" to "Greece", "pl" to "Poland", etc.
+    name: localizedCountries[index],
   }));
 
   useEffect(() => {
     const fetchAllImages = async () => {
-      // Fetch Workshops
       const fetchedWorkshops = await loadWorkshopImages();
-      setWorkshopImages(fetchedWorkshops.map((img) => img.src)); // Kept your original 10 limit
+      setWorkshopImages(fetchedWorkshops.map((img) => img.src));
 
-      // Fetch Products
       const grProducts = await loadProductImages("gr");
       const plProducts = await loadProductImages("pl");
       const trProducts = await loadProductImages("tr");
@@ -114,7 +114,33 @@ const Gallery = () => {
     };
   }, [selectedIndex]);
 
-  // Updated to accept the specific array of images clicked
+  useEffect(() => {
+    if (selectedIndex !== null && activeImages.length > 0) {
+      setIsLightboxLoading(true);
+
+      const nextIndex = (selectedIndex + 1) % activeImages.length;
+      const prevIndex =
+        selectedIndex === 0 ? activeImages.length - 1 : selectedIndex - 1;
+
+      const imgNext = new Image();
+      imgNext.src = activeImages[nextIndex];
+
+      const imgPrev = new Image();
+      imgPrev.src = activeImages[prevIndex];
+    }
+  }, [selectedIndex, activeImages]);
+
+  // NEW: Timer to delay the spinner by 150ms
+  useEffect(() => {
+    let timer;
+    if (isLightboxLoading) {
+      timer = setTimeout(() => setShowSpinner(true), 150);
+    } else {
+      setShowSpinner(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isLightboxLoading]);
+
   const openLightbox = (index, imageArray) => {
     setSlideDirection("");
     setActiveImages(imageArray);
@@ -124,7 +150,6 @@ const Gallery = () => {
   const closeLightbox = () => {
     setSelectedIndex(null);
     setSlideDirection("");
-    // Optional: clear activeImages after close transition
     setTimeout(() => setActiveImages([]), 300);
   };
 
@@ -205,38 +230,48 @@ const Gallery = () => {
       <div className="w-full p-6 xs:p-8 md:p-12 lg:p-16 xl:p-20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-12 md:gap-16 justify-evenly items-center flex-1 w-full">
-            {/* WORKSHOPS SECTION */}
             <div className="w-full">
               <SectionHeader
                 title={t("gallery.title")}
                 description={t("gallery.description")}
               />
-              <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
+
+              <div className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
                 {workshopImages.map((image, index) => (
                   <GalleryImage
-                    key={index}
+                    key={`grid-workshop-${index}`}
                     src={image}
                     index={index}
                     onClick={() => openLightbox(index, workshopImages)}
                   />
                 ))}
               </div>
+
+              <div className="block md:hidden mt-4 md:mt-6 w-full">
+                <Carousel
+                  items={workshopImages}
+                  renderItem={(image, index) => (
+                    <GalleryImage
+                      src={image}
+                      index={index}
+                      inCarousel={true}
+                      onClick={() => openLightbox(index, workshopImages)}
+                    />
+                  )}
+                />
+              </div>
             </div>
 
-            {/* PRODUCTS SECTION */}
             <div className="w-full">
-              {/* Products Title */}
               <SectionHeader
                 title={t("gallery.products")}
                 description={t("gallery.prodDesc")}
               />
 
-              {/* Dynamic Country Grids */}
               <div className="flex flex-col gap-12 md:gap-16 mt-4 md:mt-6">
                 {countries.map((country) => {
                   const imagesForCountry = productImages[country.code];
 
-                  // Only render the section if there are actually images for this country
                   if (!imagesForCountry || imagesForCountry.length === 0)
                     return null;
 
@@ -248,10 +283,11 @@ const Gallery = () => {
                           titleColor="text-lg! md:text-xl! lg:text-2xl! text-(--color-dark-text) dark:text-white"
                         />
                       </div>
-                      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full">
+
+                      <div className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full">
                         {imagesForCountry.map((image, index) => (
                           <GalleryImage
-                            key={index}
+                            key={`grid-${country.code}-${index}`}
                             src={image}
                             index={index}
                             onClick={() =>
@@ -259,6 +295,22 @@ const Gallery = () => {
                             }
                           />
                         ))}
+                      </div>
+
+                      <div className="block md:hidden mt-4 w-full">
+                        <Carousel
+                          items={imagesForCountry}
+                          renderItem={(image, index) => (
+                            <GalleryImage
+                              src={image}
+                              index={index}
+                              inCarousel={true}
+                              onClick={() =>
+                                openLightbox(index, imagesForCountry)
+                              }
+                            />
+                          )}
+                        />
                       </div>
                     </div>
                   );
@@ -269,7 +321,6 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* LIGHTBOX */}
       {selectedIndex !== null && activeImages.length > 0 && (
         <div
           className="fixed inset-0 z-5000 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
@@ -280,17 +331,27 @@ const Gallery = () => {
         >
           <div className="relative w-full h-full max-w-7xl max-h-screen px-4 pt-20 pb-6 xs:px-16 xs:pt-24 xs:pb-8 md:px-24 flex flex-col items-center justify-center pointer-events-none overflow-hidden">
             <div className="flex-1 flex items-center justify-center w-full min-h-0 relative">
+              {/* UPDATED: Uses showSpinner to prevent flashing on fast loads */}
+              {showSpinner && (
+                <div className="absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-300">
+                  <div className="w-10 h-10 border-4 border-white/20 border-t-white rounded-full animate-spin" />
+                </div>
+              )}
+
               <img
                 key={selectedIndex}
                 src={activeImages[selectedIndex]}
                 alt={`Expanded view ${selectedIndex + 1}`}
-                className={`max-w-full max-h-full object-contain rounded-sm shadow-2xl pointer-events-auto ${
+                className={`max-w-full max-h-full object-contain rounded-sm shadow-2xl pointer-events-auto transition-opacity duration-300 ${
+                  isLightboxLoading ? "opacity-0" : "opacity-100"
+                } ${
                   slideDirection === "next"
                     ? "animate-slide-next"
                     : slideDirection === "prev"
                       ? "animate-slide-prev"
                       : "animate-fade-scale"
                 }`}
+                onLoad={() => setIsLightboxLoading(false)}
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
