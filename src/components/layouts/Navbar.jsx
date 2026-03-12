@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useState, useRef, useEffect } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ export default function Navbar() {
   const dropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const hamburgerButtonRef = useRef(null);
+  const location = useLocation();
 
   const languages = [
     { code: "en", name: "English", flag: "us" },
@@ -65,6 +66,8 @@ export default function Navbar() {
   const currentLanguage =
     languages.find((lang) => lang.code === i18n.language) || languages[0];
 
+  const isActive = (path) => location.pathname === path;
+
   return (
     <nav className="bg-white dark:bg-(--color-bg-dark) p-2.5 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 flex items-center drop-shadow-sm sticky top-0 z-10 transition-colors duration-200">
       {/* Left Section */}
@@ -110,29 +113,40 @@ export default function Navbar() {
       </div>
 
       {/* Center Section */}
-      <div className="hidden md:flex justify-center flex-1 min-w-fit text-center xl:absolute xl:left-1/2 xl:-translate-x-1/2 text-sm lg:text-[15px] xl:text-base space-x-4 lg:space-x-8 xl:space-x-12 font-medium [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd] text-(--color-dark-text) dark:text-white">
-        <Link to="/" className="hover-anim">
+      <div className="hidden lg:flex justify-center flex-1 min-w-fit text-center xl:absolute xl:left-1/2 xl:-translate-x-1/2 text-sm lg:text-[15px] xl:text-base space-x-4 lg:space-x-8 xl:space-x-12 font-medium [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd] text-(--color-dark-text) dark:text-white">
+        <Link to="/" className={`hover-anim ${isActive("/") ? "active" : ""}`}>
           {t("navbar.home")}
         </Link>
-        <Link to="/about" className="hover-anim">
+        <Link
+          to="/about"
+          className={`hover-anim ${isActive("/about") ? "active" : ""}`}
+        >
           {t("navbar.about")}
         </Link>
-        <Link to="/guide" className="hover-anim">
+        <Link
+          to="/guide"
+          className={`hover-anim ${isActive("/guide") ? "active" : ""}`}
+        >
           {t("navbar.guide")}
         </Link>
-        <Link to="/ceramics" className="hover-anim">
+        <Link
+          to="/ceramics"
+          className={`hover-anim ${isActive("/ceramics") ? "active" : ""}`}
+        >
           {t("navbar.ceramics")}
         </Link>
-        <Link to="/contact" className="hover-anim">
+        <Link
+          to="/contact"
+          className={`hover-anim ${isActive("/contact") ? "active" : ""}`}
+        >
           {t("navbar.contact")}
         </Link>
       </div>
 
       {/* Right Section */}
-      <div className="flex flex-row justify-end items-center space-x-2 sm:space-x-2.5 md:space-x-2.5 lg:space-x-2.5 xl:space-x-2.5 flex-1 md:flex-none xl:flex-1 max-w-none md:max-w-fit xl:max-w-none">
+      <div className="flex flex-row justify-end items-center space-x-2 sm:space-x-2.5 md:space-x-2.5 lg:space-x-2.5 xl:space-x-2.5 flex-1 lg:flex-none xl:flex-1 max-w-none lg:max-w-fit xl:max-w-none">
         {/* Desktop Theme & Language Container */}
-        {/* Changed from hidden xs:flex to hidden md:flex */}
-        <div className="hidden md:flex flex-row items-center space-x-2 sm:space-x-2.5">
+        <div className="hidden lg:flex flex-row items-center space-x-2 sm:space-x-2.5">
           <ThemeToggle />
 
           <div className="relative" ref={dropdownRef}>
@@ -193,8 +207,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger Button with invisible touch target */}
-        {/* Changed from xs:hidden to md:hidden */}
-        <div className="relative md:hidden flex items-center justify-center w-10 h-10 shrink-0">
+        <div className="relative lg:hidden flex items-center justify-center w-10 h-10 shrink-0">
           <button
             ref={hamburgerButtonRef}
             className="peer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-10 cursor-pointer rounded-md focus:outline-none"
@@ -230,10 +243,9 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {/* Changed from xs:hidden to md:hidden */}
       <div
         ref={mobileMenuRef}
-        className={`absolute top-full left-0 w-full bg-white dark:bg-(--color-bg-dark) shadow-md border-t border-gray-200 dark:border-(--color-divider) [transition:all_300ms,background-color_200ms,color_200ms,border-color_200ms] ease-in-out md:hidden overflow-hidden ${
+        className={`absolute top-full left-0 w-full bg-white dark:bg-(--color-bg-dark) shadow-md border-t border-gray-200 dark:border-(--color-divider) [transition:all_300ms,background-color_200ms,color_200ms,border-color_200ms] ease-in-out lg:hidden overflow-hidden ${
           isMobileMenuOpen
             ? "max-h-125 opacity-100 py-4"
             : "max-h-0 opacity-0 py-0"
@@ -265,39 +277,39 @@ export default function Navbar() {
           </div>
 
           {/* Bottom: Nav Links */}
-          <div className="flex flex-col space-y-4 text-center text-[15px] font-medium text-(--color-dark-text) dark:text-white pb-2">
+          <div className="flex flex-col space-y-4 text-center text-[15px] font-medium text-(--color-dark-text) dark:text-white pb-2 [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd]">
             <Link
               to="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover-anim inline-block w-fit mx-auto"
+              className={`hover-anim inline-block w-fit mx-auto ${isActive("/") ? "active" : ""}`}
             >
               {t("navbar.home")}
             </Link>
             <Link
               to="/about"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover-anim inline-block w-fit mx-auto"
+              className={`hover-anim inline-block w-fit mx-auto ${isActive("/about") ? "active" : ""}`}
             >
               {t("navbar.about")}
             </Link>
             <Link
               to="/guide"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover-anim inline-block w-fit mx-auto"
+              className={`hover-anim inline-block w-fit mx-auto ${isActive("/guide") ? "active" : ""}`}
             >
               {t("navbar.guide")}
             </Link>
             <Link
               to="/ceramics"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover-anim inline-block w-fit mx-auto"
+              className={`hover-anim inline-block w-fit mx-auto ${isActive("/ceramics") ? "active" : ""}`}
             >
               {t("navbar.ceramics")}
             </Link>
             <Link
               to="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover-anim inline-block w-fit mx-auto"
+              className={`hover-anim inline-block w-fit mx-auto ${isActive("/contact") ? "active" : ""}`}
             >
               {t("navbar.contact")}
             </Link>

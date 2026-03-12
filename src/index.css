@@ -170,3 +170,20 @@ html {
   background-color: rgba(37, 99, 235, 0.1) !important;
   border-radius: 4px;
 }
+
+/* Active Navigation Links */
+.hover-anim.active::before {
+  width: 100%;
+  left: 0;
+  background-color: var(
+    --active-color,
+    #1118279f
+  ); /* Solid, darker gray for light mode */
+}
+
+.dark .hover-anim.active::before {
+  background-color: var(
+    --active-color-dark,
+    #d1d5dbe8
+  ); /* Solid, bright gray for dark mode */
+}
