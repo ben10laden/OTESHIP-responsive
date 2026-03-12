@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { loadWorkshopImages } from "../data/Workshops/workshopImages";
+import {
+  loadWorkshopImages,
+  loadProductImages,
+} from "../data/Workshops/workshopImages";
 import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/common/SectionHeader";
 
@@ -14,10 +17,9 @@ const GalleryImage = ({ src, index, onClick }) => {
       data-aos-delay={300 + index * 50}
       data-aos-offset="0"
       onClick={onClick}
-      // Widths are calculated to account for the gaps (gap-2 = 0.5rem, gap-4 = 1rem)
-      className="relative rounded-md overflow-hidden shadow-md cursor-pointer bg-gray-200 dark:bg-gray-800 group w-full xs:w-[calc(50%-0.25rem)] md:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)]"
+      className="relative rounded-md overflow-hidden shadow-md cursor-pointer bg-gray-200 dark:bg-gray-800 group w-full xs:w-[calc((100%-0.5rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)]"
       style={{
-        height: "200px", // Changed to fixed height to ensure all images are exactly the same size
+        height: "200px",
         contentVisibility: "auto",
         containIntrinsicSize: "200px",
       }}
@@ -53,7 +55,17 @@ const GalleryImage = ({ src, index, onClick }) => {
 
 const Gallery = () => {
   const { t } = useTranslation("gallery");
-  const [images, setImages] = useState([]);
+
+  // States for different image categories
+  const [workshopImages, setWorkshopImages] = useState([]);
+  const [productImages, setProductImages] = useState({
+    gr: [],
+    pl: [],
+    tr: [],
+  });
+
+  // Lightbox states
+  const [activeImages, setActiveImages] = useState([]); // Tells the lightbox which array to cycle through
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [slideDirection, setSlideDirection] = useState("");
 
@@ -61,14 +73,34 @@ const Gallery = () => {
   const [touchEnd, setTouchEnd] = useState(null);
   const minSwipeDistance = 50;
 
-  const displayedImages = images.slice(0, 10);
+  const localizedCountries = t("gallery.countries", { returnObjects: true });
+
+  const countryCodes = ["gr", "pl", "tr"];
+
+  const countries = countryCodes.map((code, index) => ({
+    code: code,
+    name: localizedCountries[index], // Maps "gr" to "Greece", "pl" to "Poland", etc.
+  }));
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const workshopImages = await loadWorkshopImages();
-      setImages(workshopImages.map((img) => img.src));
+    const fetchAllImages = async () => {
+      // Fetch Workshops
+      const fetchedWorkshops = await loadWorkshopImages();
+      setWorkshopImages(fetchedWorkshops.map((img) => img.src).slice(0, 10)); // Kept your original 10 limit
+
+      // Fetch Products
+      const grProducts = await loadProductImages("gr");
+      const plProducts = await loadProductImages("pl");
+      const trProducts = await loadProductImages("tr");
+
+      setProductImages({
+        gr: grProducts.map((img) => img.src),
+        pl: plProducts.map((img) => img.src),
+        tr: trProducts.map((img) => img.src),
+      });
     };
-    fetchImages();
+
+    fetchAllImages();
   }, []);
 
   useEffect(() => {
@@ -82,23 +114,27 @@ const Gallery = () => {
     };
   }, [selectedIndex]);
 
-  const openLightbox = (index) => {
+  // Updated to accept the specific array of images clicked
+  const openLightbox = (index, imageArray) => {
     setSlideDirection("");
+    setActiveImages(imageArray);
     setSelectedIndex(index);
   };
 
   const closeLightbox = () => {
     setSelectedIndex(null);
     setSlideDirection("");
+    // Optional: clear activeImages after close transition
+    setTimeout(() => setActiveImages([]), 300);
   };
 
   const showNext = useCallback(
     (e) => {
       if (e) e.stopPropagation();
       setSlideDirection("next");
-      setSelectedIndex((prev) => (prev + 1) % displayedImages.length);
+      setSelectedIndex((prev) => (prev + 1) % activeImages.length);
     },
-    [displayedImages.length],
+    [activeImages.length],
   );
 
   const showPrev = useCallback(
@@ -106,10 +142,10 @@ const Gallery = () => {
       if (e) e.stopPropagation();
       setSlideDirection("prev");
       setSelectedIndex((prev) =>
-        prev === 0 ? displayedImages.length - 1 : prev - 1,
+        prev === 0 ? activeImages.length - 1 : prev - 1,
       );
     },
-    [displayedImages.length],
+    [activeImages.length],
   );
 
   const handleKeyDown = useCallback(
@@ -138,16 +174,12 @@ const Gallery = () => {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
 
-    if (isLeftSwipe) {
-      showNext();
-    } else if (isRightSwipe) {
-      showPrev();
-    }
+    if (isLeftSwipe) showNext();
+    else if (isRightSwipe) showPrev();
   };
 
   return (
@@ -172,31 +204,73 @@ const Gallery = () => {
 
       <div className="w-full p-6 xs:p-8 md:p-12 lg:p-16 xl:p-20">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col gap-2 md:gap-3 lg:gap-4 xl:gap-6 justify-evenly items-center flex-1 w-full">
-            <SectionHeader
-              title={t("gallery.title")}
-              description={t("gallery.description")}
-            />
-
+          <div className="flex flex-col gap-12 md:gap-16 justify-evenly items-center flex-1 w-full">
+            {/* WORKSHOPS SECTION */}
             <div className="w-full">
-              {/* Swapped Grid for Flexbox to handle the centered last row requirement */}
-              <div className="flex flex-wrap justify-center gap-2 md:gap-4">
-                {displayedImages.map((image, index) => (
+              <SectionHeader
+                title={t("gallery.title")}
+                description={t("gallery.description")}
+              />
+              <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
+                {workshopImages.map((image, index) => (
                   <GalleryImage
                     key={index}
                     src={image}
                     index={index}
-                    onClick={() => openLightbox(index)}
+                    onClick={() => openLightbox(index, workshopImages)}
                   />
                 ))}
+              </div>
+            </div>
+
+            {/* PRODUCTS SECTION */}
+            <div className="w-full">
+              {/* Products Title */}
+              <SectionHeader
+                title={t("gallery.products")}
+                description={t("gallery.prodDesc")}
+              />
+
+              {/* Dynamic Country Grids */}
+              <div className="flex flex-col gap-12 md:gap-16 mt-4 md:mt-6">
+                {countries.map((country) => {
+                  const imagesForCountry = productImages[country.code];
+
+                  // Only render the section if there are actually images for this country
+                  if (!imagesForCountry || imagesForCountry.length === 0)
+                    return null;
+
+                  return (
+                    <div key={country.code} className="w-full">
+                      <div className="[&>div]:items-start!">
+                        <SectionHeader
+                          title={country.name}
+                          titleColor="text-lg! md:text-xl! lg:text-2xl!"
+                        />
+                      </div>
+                      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full">
+                        {imagesForCountry.map((image, index) => (
+                          <GalleryImage
+                            key={index}
+                            src={image}
+                            index={index}
+                            onClick={() =>
+                              openLightbox(index, imagesForCountry)
+                            }
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Lightbox code remains completely unchanged below this point */}
-      {selectedIndex !== null && (
+      {/* LIGHTBOX */}
+      {selectedIndex !== null && activeImages.length > 0 && (
         <div
           className="fixed inset-0 z-5000 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
           onClick={closeLightbox}
@@ -208,7 +282,7 @@ const Gallery = () => {
             <div className="flex-1 flex items-center justify-center w-full min-h-0 relative">
               <img
                 key={selectedIndex}
-                src={displayedImages[selectedIndex]}
+                src={activeImages[selectedIndex]}
                 alt={`Expanded view ${selectedIndex + 1}`}
                 className={`max-w-full max-h-full object-contain rounded-sm shadow-2xl pointer-events-auto ${
                   slideDirection === "next"
@@ -225,7 +299,7 @@ const Gallery = () => {
               className="mt-4 text-white/70 text-sm tracking-widest shrink-0 pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              {selectedIndex + 1} / {displayedImages.length}
+              {selectedIndex + 1} / {activeImages.length}
             </div>
           </div>
 

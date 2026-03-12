@@ -1,6 +1,9 @@
 {
   "gallery": {
     "title": "Our Photo Gallery",
-    "description": "Photos from our workshops and products."
+    "description": "Photos from our workshops and products.",
+    "products": "Products",
+    "prodDesc": "Browse our international product lines.",
+    "countries": ["Greece", "Poland", "Turkey"]
   }
 }

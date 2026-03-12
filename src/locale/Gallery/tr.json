@@ -1,6 +1,9 @@
 {
   "gallery": {
     "title": "Fotoğraf Galerimiz",
-    "description": "Atölyelerimizden ve ürünlerimizden fotoğraflar."
+    "description": "Atölyelerimizden ve ürünlerimizden fotoğraflar.",
+    "products": "Ürünler",
+    "prodDesc": "Uluslararası ürün serilerimize göz atın.",
+    "countries": ["Yunanistan", "Polonya", "Türkiye"]
   }
 }
