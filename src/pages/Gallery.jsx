@@ -86,7 +86,7 @@ const Gallery = () => {
     const fetchAllImages = async () => {
       // Fetch Workshops
       const fetchedWorkshops = await loadWorkshopImages();
-      setWorkshopImages(fetchedWorkshops.map((img) => img.src).slice(0, 10)); // Kept your original 10 limit
+      setWorkshopImages(fetchedWorkshops.map((img) => img.src)); // Kept your original 10 limit
 
       // Fetch Products
       const grProducts = await loadProductImages("gr");
