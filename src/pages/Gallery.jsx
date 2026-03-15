@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/common/SectionHeader";
 import Carousel from "../components/common/Carousel";
 
-const GalleryImage = ({ src, index, onClick, inCarousel = false }) => {
+const GalleryImage = ({ src, index, onClick, inCarousel = false, anchorId }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -17,6 +17,8 @@ const GalleryImage = ({ src, index, onClick, inCarousel = false }) => {
       data-aos={inCarousel ? "" : "fade-down"}
       data-aos-delay={inCarousel ? 0 : 300 + index * 50}
       data-aos-offset="0"
+      // Added the AOS anchor logic here
+      data-aos-anchor={inCarousel || !anchorId ? undefined : `#${anchorId}`}
       onClick={onClick}
       className={`relative rounded-md overflow-hidden shadow-md cursor-pointer bg-gray-200 dark:bg-gray-800 group ${
         inCarousel
@@ -73,7 +75,6 @@ const Gallery = () => {
   const [slideDirection, setSlideDirection] = useState("");
 
   const [isLightboxLoading, setIsLightboxLoading] = useState(true);
-  // NEW: State to control delayed spinner visibility
   const [showSpinner, setShowSpinner] = useState(false);
 
   const [touchStart, setTouchStart] = useState(null);
@@ -114,7 +115,7 @@ const Gallery = () => {
     }
     return () => {
       document.body.style.overflow = "";
-    };
+    }
   }, [selectedIndex]);
 
   useEffect(() => {
@@ -133,7 +134,6 @@ const Gallery = () => {
     }
   }, [selectedIndex, activeImages]);
 
-  // NEW: Timer to delay the spinner by 150ms
   useEffect(() => {
     let timer;
     if (isLightboxLoading) {
@@ -239,12 +239,14 @@ const Gallery = () => {
                 description={t("gallery.description")}
               />
 
-              <div className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
+              {/* Added ID to the workshop grid wrapper */}
+              <div id="workshop-grid" className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
                 {workshopImages.map((image, index) => (
                   <GalleryImage
                     key={`grid-workshop-${index}`}
                     src={image}
                     index={index}
+                    anchorId="workshop-grid"
                     onClick={() => openLightbox(index, workshopImages)}
                   />
                 ))}
@@ -287,12 +289,14 @@ const Gallery = () => {
                         />
                       </div>
 
-                      <div className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full">
+                      {/* Added dynamically generated ID to each product grid wrapper */}
+                      <div id={`product-grid-${country.code}`} className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full">
                         {imagesForCountry.map((image, index) => (
                           <GalleryImage
                             key={`grid-${country.code}-${index}`}
                             src={image}
                             index={index}
+                            anchorId={`product-grid-${country.code}`}
                             onClick={() =>
                               openLightbox(index, imagesForCountry)
                             }
@@ -334,7 +338,6 @@ const Gallery = () => {
         >
           <div className="relative w-full h-full max-w-7xl max-h-screen px-4 pt-20 pb-6 xs:px-16 xs:pt-24 xs:pb-8 md:px-24 flex flex-col items-center justify-center pointer-events-none overflow-hidden">
             <div className="flex-1 flex items-center justify-center w-full min-h-0 relative">
-              {/* UPDATED: Uses showSpinner to prevent flashing on fast loads */}
               {showSpinner && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 transition-opacity duration-300">
                   <div className="w-10 h-10 border-4 border-white/20 border-t-white rounded-full animate-spin" />
