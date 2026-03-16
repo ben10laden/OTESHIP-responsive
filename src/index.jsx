@@ -33,7 +33,7 @@ export default function Index() {
   // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 500,
+      duration: 550,
       once: true,
     });
     AOS.refresh();
