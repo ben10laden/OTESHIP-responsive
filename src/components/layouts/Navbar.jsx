@@ -157,6 +157,7 @@ export default function Navbar() {
 
           <div className="relative" ref={dropdownRef}>
             <button
+              aria-label="Toggle Language Dropdown"
               onClick={toggleLanguageDropdown}
               className="flex w-12.5 sm:w-13.75 md:w-15 lg:w-17.5 xl:w-20 px-2 sm:px-2.5 md:px-2.5 lg:px-3 xl:px-3.5 py-1 lg:py-1.5 space-x-1 md:space-x-1.5 xl:space-x-2 bg-gray-100 dark:bg-(--color-dark2-text) border border-gray-300 dark:border-gray-500 rounded-md cursor-pointer flex-row justify-center items-center hover:bg-gray-200 dark:hover:bg-black/40 transition-all duration-200"
             >
@@ -178,6 +179,7 @@ export default function Navbar() {
               <div>
                 {languages.map((language, index) => (
                   <button
+                    aria-label={language}
                     key={language.code}
                     onClick={() => selectLanguage(language)}
                     className={`flex items-center w-full px-4 py-2 text-sm transition-all duration-150 cursor-pointer ${
@@ -265,6 +267,7 @@ export default function Navbar() {
             <div className="flex space-x-2 bg-[#eceef0] dark:bg-(--color-dark2-text) p-1 rounded-md transition-colors duration-200">
               {languages.map((language) => (
                 <button
+                  aria-label={language}
                   key={language.code}
                   onClick={() => {
                     selectLanguage(language);

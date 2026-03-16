@@ -71,6 +71,7 @@ const AccessibilityMenu = () => {
             <div className="flex gap-2">
               {["normal", "large", "xlarge"].map((size) => (
                 <button
+                  aria-label="Change Font Size"
                   key={size}
                   onClick={() => updateSettings({ fontSize: size })}
                   className={`
@@ -97,6 +98,7 @@ const AccessibilityMenu = () => {
             <div className="flex gap-2">
               {["normal", "high"].map((contrast) => (
                 <button
+                  aria-label="Change Contrast"
                   key={contrast}
                   onClick={() => updateSettings({ contrast })}
                   className={`
@@ -123,6 +125,7 @@ const AccessibilityMenu = () => {
             <div className="flex gap-2">
               {["normal", "wide"].map((spacing) => (
                 <button
+                  aria-label="Change Line Spacing"
                   key={spacing}
                   onClick={() => updateSettings({ lineSpacing: spacing })}
                   className={`
@@ -184,6 +187,7 @@ const AccessibilityMenu = () => {
 
           {/* Reset Button */}
           <button
+            aria-label="Reset to Default"
             onClick={() =>
               updateSettings({
                 fontSize: "normal",

@@ -66,6 +66,7 @@ const ContactForm = () => {
 
         {/* Button */}
         <button
+          aria-label="Submit"
           type="submit"
           className="w-full mt-2 cursor-pointer font-bold rounded-md transition-all duration-300 whitespace-nowrap text-center
                      text-xs sm:text-sm lg:text-base 
