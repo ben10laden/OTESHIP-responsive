@@ -39,11 +39,6 @@ export default function Index() {
     AOS.refresh();
   }, []);
 
-  // Refresh AOS on route change
-  useEffect(() => {
-    AOS.refresh();
-  }, [location.pathname]);
-
   if (isGuidePage) {
     return (
       <div className="flex flex-col min-h-screen bg-[#F8FAFC] dark:bg-[#0b101a]">
