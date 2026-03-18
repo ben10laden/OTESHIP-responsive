@@ -7,7 +7,16 @@ import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/common/SectionHeader";
 import Carousel from "../components/common/Carousel";
 
-const GalleryImage = ({ src, index, onClick, inCarousel = false, anchorId }) => {
+// 1. Import the skeleton here so we can use it during the data fetch
+import GalleryPageSkeleton from "../components/skeletons/GalleryPageSkeleton"; // Adjust path if needed
+
+const GalleryImage = ({
+  src,
+  index,
+  onClick,
+  inCarousel = false,
+  anchorId,
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -17,17 +26,16 @@ const GalleryImage = ({ src, index, onClick, inCarousel = false, anchorId }) => 
       data-aos={inCarousel ? "" : "fade-down"}
       data-aos-delay={inCarousel ? 0 : 300 + index * 50}
       data-aos-offset="0"
-      // Added the AOS anchor logic here
       data-aos-anchor={inCarousel || !anchorId ? undefined : `#${anchorId}`}
       onClick={onClick}
       className={`relative rounded-md overflow-hidden shadow-md cursor-pointer bg-gray-200 dark:bg-gray-800 group ${
         inCarousel
-          ? "w-full h-50 xs:h-65" // Taller responsive heights for the carousel
+          ? "w-full h-50 xs:h-65"
           : "w-full h-50 xs:w-[calc((100%-0.5rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)]"
       }`}
       style={
         inCarousel
-          ? {} // Strip the hardcoded constraints so the tailwind classes can take over
+          ? {}
           : {
               contentVisibility: "auto",
               containIntrinsicSize: "200px",
@@ -63,6 +71,9 @@ const GalleryImage = ({ src, index, onClick, inCarousel = false, anchorId }) => 
 const Gallery = () => {
   const { t } = useTranslation("gallery");
 
+  // 2. Add an internal loading state specifically for the data fetch
+  const [isLoadingData, setIsLoadingData] = useState(true);
+
   const [workshopImages, setWorkshopImages] = useState([]);
   const [productImages, setProductImages] = useState({
     gr: [],
@@ -90,18 +101,28 @@ const Gallery = () => {
 
   useEffect(() => {
     const fetchAllImages = async () => {
-      const fetchedWorkshops = await loadWorkshopImages();
-      setWorkshopImages(fetchedWorkshops.map((img) => img.src));
+      try {
+        // 🚀 FIRE ALL REQUESTS IN PARALLEL
+        const [fetchedWorkshops, grProducts, plProducts, trProducts] =
+          await Promise.all([
+            loadWorkshopImages(),
+            loadProductImages("gr"),
+            loadProductImages("pl"),
+            loadProductImages("tr"),
+          ]);
 
-      const grProducts = await loadProductImages("gr");
-      const plProducts = await loadProductImages("pl");
-      const trProducts = await loadProductImages("tr");
+        setWorkshopImages(fetchedWorkshops.map((img) => img.src));
 
-      setProductImages({
-        gr: grProducts.map((img) => img.src),
-        pl: plProducts.map((img) => img.src),
-        tr: trProducts.map((img) => img.src),
-      });
+        setProductImages({
+          gr: grProducts.map((img) => img.src),
+          pl: plProducts.map((img) => img.src),
+          tr: trProducts.map((img) => img.src),
+        });
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
+        setIsLoadingData(false);
+      }
     };
 
     fetchAllImages();
@@ -115,7 +136,7 @@ const Gallery = () => {
     }
     return () => {
       document.body.style.overflow = "";
-    }
+    };
   }, [selectedIndex]);
 
   useEffect(() => {
@@ -210,6 +231,11 @@ const Gallery = () => {
     else if (isRightSwipe) showPrev();
   };
 
+  // 4. EARLY RETURN: Show the skeleton if the data is still fetching
+  if (isLoadingData) {
+    return <GalleryPageSkeleton />;
+  }
+
   return (
     <div className="bg-(--color-bg-primary) dark:bg-(--color-dark-text) w-full relative">
       <style>{`
@@ -239,8 +265,10 @@ const Gallery = () => {
                 description={t("gallery.description")}
               />
 
-              {/* Added ID to the workshop grid wrapper */}
-              <div id="workshop-grid" className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
+              <div
+                id="workshop-grid"
+                className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full"
+              >
                 {workshopImages.map((image, index) => (
                   <GalleryImage
                     key={`grid-workshop-${index}`}
@@ -289,8 +317,10 @@ const Gallery = () => {
                         />
                       </div>
 
-                      {/* Added dynamically generated ID to each product grid wrapper */}
-                      <div id={`product-grid-${country.code}`} className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full">
+                      <div
+                        id={`product-grid-${country.code}`}
+                        className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-2 w-full"
+                      >
                         {imagesForCountry.map((image, index) => (
                           <GalleryImage
                             key={`grid-${country.code}-${index}`}
@@ -330,7 +360,7 @@ const Gallery = () => {
 
       {selectedIndex !== null && activeImages.length > 0 && (
         <div
-          className="fixed inset-0 z-5000 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
+          className="fixed inset-0 z-3 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
           onClick={closeLightbox}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
@@ -371,7 +401,7 @@ const Gallery = () => {
           </div>
 
           <button
-            className="absolute top-4 right-4 xs:top-6 xs:right-6 text-white/90 hover:text-white bg-black/40 hover:bg-black/60 transition-colors z-60 p-2 rounded-full cursor-pointer"
+            className="absolute top-4 right-4 xs:top-6 xs:right-6 text-white/90 hover:text-white bg-black/40 hover:bg-black/60 transition-colors z-2 p-2 rounded-full cursor-pointer pointer-events-auto"
             onClick={closeLightbox}
             aria-label="Close lightbox"
           >
@@ -392,7 +422,7 @@ const Gallery = () => {
           </button>
 
           <button
-            className="hidden md:flex w-12 h-12 items-center justify-center absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/40 hover:bg-black/60 transition-colors z-60 rounded-full cursor-pointer"
+            className="hidden md:flex w-12 h-12 items-center justify-center absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/40 hover:bg-black/60 transition-colors z-2 rounded-full cursor-pointer pointer-events-auto"
             onClick={showPrev}
             aria-label="Previous image"
           >
@@ -413,7 +443,7 @@ const Gallery = () => {
           </button>
 
           <button
-            className="hidden md:flex w-12 h-12 items-center justify-center absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/40 hover:bg-black/60 transition-colors z-60 rounded-full cursor-pointer"
+            className="hidden md:flex w-12 h-12 items-center justify-center absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white bg-black/40 hover:bg-black/60 transition-colors z-2 rounded-full cursor-pointer pointer-events-auto"
             onClick={showNext}
             aria-label="Next image"
           >

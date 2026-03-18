@@ -1,5 +1,4 @@
-// src/Index.jsx
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route, useLocation } from "react-router";
 import Navbar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
@@ -12,8 +11,13 @@ import NotFound from "./pages/NotFound";
 import { useLayoutEffect } from "react"; // Add useLayoutEffect
 import ScrollToTopButton from "./components/layouts/ScrollToTopButton";
 import SideBar from "./components/sections/Guide/SideBar";
-import Gallery from "./pages/Gallery";
 import AccessibilityMenu from "./components/layouts/AccessibilityMenu";
+
+// 1. Import your new skeleton
+import GalleryPageSkeleton from "./components/skeletons/GalleryPageSkeleton"; // <-- Adjust path based on where you saved it
+
+// 2. Lazily load the heavy Gallery page
+const Gallery = lazy(() => import("./pages/Gallery"));
 
 export default function Index() {
   const location = useLocation();
@@ -73,7 +77,14 @@ export default function Index() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/ceramics" element={<Ceramics />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route
+            path="/gallery"
+            element={
+              <Suspense fallback={<GalleryPageSkeleton />}>
+                <Gallery />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
