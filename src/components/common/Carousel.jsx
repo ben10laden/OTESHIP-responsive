@@ -7,6 +7,8 @@ const Carousel = ({
   gridContainerClassName = "",
 }) => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [windowStart, setWindowStart] = useState(0);
+  const MAX_VISIBLE_PAGES = 5;
 
   const [cardsPerPage, setCardsPerPage] = useState(() => {
     if (typeof window !== "undefined") {
@@ -44,13 +46,39 @@ const Carousel = ({
 
   useEffect(() => {
     if (totalCards > 0 && currentPage >= totalPages) {
-      setCurrentPage(0);
+      handlePageChange(0);
     }
-  }, [cardsPerPage, currentPage, totalPages, totalCards]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cardsPerPage, totalPages, totalCards]);
 
-  const handlePrev = () => setCurrentPage((prev) => Math.max(0, prev - 1));
-  const handleNext = () =>
-    setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1));
+  // --- The Push/Pull Window Math ---
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+
+    setWindowStart((prevStart) => {
+      let newStart = prevStart;
+
+      // Push window right
+      if (newPage > prevStart + MAX_VISIBLE_PAGES - 2) {
+        newStart = newPage - MAX_VISIBLE_PAGES + 2;
+      }
+      // Pull window left
+      else if (newPage < prevStart + 1) {
+        newStart = newPage - 1;
+      }
+
+      const maxStart = Math.max(0, totalPages - MAX_VISIBLE_PAGES);
+      return Math.min(Math.max(0, newStart), maxStart);
+    });
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) handlePageChange(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) handlePageChange(currentPage + 1);
+  };
 
   const onTouchStart = (e) => {
     setTouchEndX(null);
@@ -75,24 +103,6 @@ const Carousel = ({
     if (distanceX > minSwipeDistance && currentPage < totalPages - 1)
       handleNext();
     if (distanceX < -minSwipeDistance && currentPage > 0) handlePrev();
-  };
-
-  // --- True Instagram/iOS Dot State Calculation ---
-  const getDotState = (index) => {
-    if (totalPages <= 5) {
-      return index === currentPage ? "active" : "normal";
-    }
-
-    // Determine the 5-dot window based on current page
-    const start = Math.max(0, Math.min(currentPage - 2, totalPages - 5));
-    const end = start + 4;
-
-    if (index < start || index > end) return "hidden";
-    if (index === currentPage) return "active";
-    if (index === start && start !== 0) return "ghost"; // Leftmost visible dot shrinks to ghost
-    if (index === end && end !== totalPages - 1) return "ghost"; // Rightmost visible dot shrinks to ghost
-
-    return "normal";
   };
 
   return (
@@ -134,38 +144,57 @@ const Carousel = ({
       {/* Navigation */}
       {totalPages > 1 && (
         <div className="flex flex-col items-center gap-4 mt-8 md:mt-10 lg:mt-12 w-full">
-          {/* We remove standard gaps and use margins on the dots instead so hidden dots don't take up space */}
-          <div className="flex justify-center items-center h-6 w-full max-w-md overflow-visible">
-            {Array.from({ length: totalPages }).map((_, index) => {
-              const state = getDotState(index);
+          {/* THE CLIPPING MASK */}
+          <div className="overflow-hidden max-w-22 flex items-center h-6 relative">
+            {/* THE SLIDING TRACK */}
+            <div
+              className="flex gap-2 w-max transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(-${windowStart}rem)` }}
+            >
+              {Array.from({ length: totalPages }).map((_, index) => {
+                const isActive = index === currentPage;
+                const isLeftGhost = index === windowStart && windowStart > 0;
+                const isRightGhost =
+                  index === windowStart + MAX_VISIBLE_PAGES - 1 &&
+                  windowStart < totalPages - MAX_VISIBLE_PAGES;
+                const isHidden =
+                  index < windowStart ||
+                  index >= windowStart + MAX_VISIBLE_PAGES;
 
-              let classes =
-                "rounded-full transition-all duration-300 ease-in-out cursor-pointer ";
+                // flex-shrink-0 preserves the track math, preventing squishing
+                let dotClasses =
+                  "h-2 rounded-full transition-all duration-300 ease-out flex-shrink-0 ";
 
-              if (state === "active") {
-                classes += "w-6 h-2 bg-blue-600 opacity-100 mx-1";
-              } else if (state === "normal") {
-                classes +=
-                  "w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 opacity-100 mx-1";
-              } else if (state === "ghost") {
-                classes +=
-                  "w-1.5 h-1.5 bg-gray-300 dark:bg-gray-600 opacity-50 mx-1";
-              } else {
-                // Completely collapses the dot so it vanishes from the layout
-                classes += "w-0 h-0 opacity-0 mx-0 pointer-events-none";
-              }
+                if (isActive) {
+                  dotClasses +=
+                    "w-6 bg-blue-600 scale-100 opacity-100 cursor-pointer";
+                } else if (isLeftGhost || isRightGhost) {
+                  // Ghost dots shrink slightly to create the 3D rounded edge effect
+                  dotClasses +=
+                    "w-2 bg-gray-400 dark:bg-gray-500 scale-75 opacity-50 cursor-pointer";
+                } else if (isHidden) {
+                  // THE FIX: Hidden dots keep their physical w-2 space for the track math,
+                  // but visually shrink to scale-0 so they don't get chopped off by the mask!
+                  dotClasses +=
+                    "w-2 bg-gray-300 dark:bg-gray-600 scale-0 opacity-0 pointer-events-none";
+                } else {
+                  dotClasses +=
+                    "w-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 scale-100 opacity-100 cursor-pointer";
+                }
 
-              return (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index)}
-                  className={classes}
-                  aria-label={`Go to page ${index + 1}`}
-                />
-              );
-            })}
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handlePageChange(index)}
+                    className={dotClasses}
+                    aria-label={`Go to page ${index + 1}`}
+                  />
+                );
+              })}
+            </div>
           </div>
 
+          {/* ... Next/Prev Buttons remain exactly the same ... */}
           <div className="flex gap-4">
             <button
               onClick={handlePrev}
