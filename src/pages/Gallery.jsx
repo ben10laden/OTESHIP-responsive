@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import {
   loadWorkshopImages,
   loadProductImages,
+  loadExhibitionImages,
 } from "../data/Workshops/workshopImages";
 import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/common/SectionHeader";
@@ -74,6 +75,7 @@ const Gallery = () => {
     pl: [],
     tr: [],
   });
+  const [exhibitionImages, setExhibitionImages] = useState([]);
 
   const [activeImages, setActiveImages] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -107,6 +109,9 @@ const Gallery = () => {
       pl: plProducts.map((img) => img.src),
       tr: trProducts.map((img) => img.src),
     });
+
+    const fetchedExhibitions = loadExhibitionImages();
+    setExhibitionImages(fetchedExhibitions.map((img) => img.src));
   }, []);
 
   useEffect(() => {
@@ -234,7 +239,9 @@ const Gallery = () => {
 
       <div className="w-full p-6 xs:p-8 md:p-12 lg:p-16 xl:p-20">
         <div className="max-w-7xl mx-auto">
+          {/* Main flex container handling the gaps between major sections */}
           <div className="flex flex-col gap-12 md:gap-16 justify-evenly items-center flex-1 w-full">
+            {/* 1. Workshops Section */}
             <div className="w-full">
               <SectionHeader
                 title={t("gallery.title")}
@@ -271,6 +278,7 @@ const Gallery = () => {
               </div>
             </div>
 
+            {/* 2. Products Section */}
             <div className="w-full">
               <SectionHeader
                 title={t("gallery.products")}
@@ -330,6 +338,45 @@ const Gallery = () => {
                 })}
               </div>
             </div>
+
+            {/* 3. Exhibitions Section */}
+            {exhibitionImages.length > 0 && (
+              <div className="w-full">
+                <SectionHeader
+                  title={t("gallery.exhibitions")}
+                  description={t("gallery.exhDesc")}
+                />
+
+                <div
+                  id="exhibition-grid"
+                  className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full"
+                >
+                  {exhibitionImages.map((image, index) => (
+                    <GalleryImage
+                      key={`grid-exhibition-${index}`}
+                      src={image}
+                      index={index}
+                      anchorId="exhibition-grid"
+                      onClick={() => openLightbox(index, exhibitionImages)}
+                    />
+                  ))}
+                </div>
+
+                <div className="block md:hidden mt-4 md:mt-6 w-full">
+                  <Carousel
+                    items={exhibitionImages}
+                    renderItem={(image, index) => (
+                      <GalleryImage
+                        src={image}
+                        index={index}
+                        inCarousel={true}
+                        onClick={() => openLightbox(index, exhibitionImages)}
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

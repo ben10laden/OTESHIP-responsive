@@ -81,6 +81,7 @@ const GalleryPageSkeleton = () => {
     <div className="bg-(--color-bg-primary) dark:bg-(--color-dark-text) w-full relative min-h-screen">
       <div className="w-full p-6 xs:p-8 md:p-12 lg:p-16 xl:p-20">
         <div className="max-w-7xl mx-auto">
+          {/* Main flex container handling gaps */}
           <div className="flex flex-col gap-12 md:gap-16 justify-evenly items-center flex-1 w-full">
             {/* 1. Workshops Section Skeleton */}
             <div className="w-full">
@@ -109,6 +110,14 @@ const GalleryPageSkeleton = () => {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* 3. Exhibitions Section Skeleton */}
+            <div className="w-full">
+              <SectionHeaderSkeleton hasDescription={true} />
+              <DesktopGridSkeleton count={8} />{" "}
+              {/* Fills 2 rows on large screens */}
+              <MobileCarouselSkeleton />
             </div>
           </div>
         </div>
