@@ -434,7 +434,7 @@ const Gallery = () => {
 
       {selectedIndex !== null && activeImages.length > 0 && (
         <div
-          className="fixed inset-0 z-3 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
+          className="fixed inset-0 z-5000 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
           onClick={closeLightbox}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
