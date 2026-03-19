@@ -1,122 +1,162 @@
-import React, { useRef } from "react";
-import { Link } from "react-router";
+import React from "react";
+import { Link } from "react-router"; // or react-router-dom depending on your setup
 import { useTranslation } from "react-i18next";
 import { useLanguageData } from "../../../hooks/useLanguageData";
 import businessBanner from "../../../assets/banners/guide-business-banner.webp";
 
 const BusinessSection = () => {
   const { t } = useTranslation("guide");
-  const { benefitsCardsData, stepsCardsData } = useLanguageData();
-  const firstItemRef = useRef(null);
+  const { entrepreneurshipStepsData } = useLanguageData();
 
   return (
     <section
-      className="flex flex-row gap-8 min-h-fit scroll-mt-32"
+      className="flex flex-col gap-10 min-h-fit scroll-mt-32 w-full"
       id="entrepreneurship"
     >
-      {/* Left content - will determine the height */}
-      <div className="flex flex-col items-start gap-6 flex-[1.5]">
-        <div
-          className="flex flex-row items-center justify-center gap-2"
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          <div className="h-1 w-8 bg-(--color-primary) rounded-full"></div>
-          <h1 className="font-semibold text-2xl text-(--color-dark-text) dark:text-white">
-            {t("business.title")}
-          </h1>
-        </div>
+      {/* Top Section: Concepts & Image */}
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* Left Content: Concepts */}
+        <div className="flex flex-col items-start gap-6 flex-[1.5]">
+          <div
+            className="flex flex-row items-center justify-center gap-2"
+            data-aos="fade-up"
+          >
+            <div className="h-1 w-8 bg-(--color-primary) rounded-full"></div>
+            <h1 className="font-semibold text-2xl text-(--color-dark-text) dark:text-white">
+              {t("business.title")}
+            </h1>
+          </div>
 
-        {/* Description - First element */}
-        <p
-          className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)"
-          ref={firstItemRef}
-          data-aos="fade-down"
-          data-aos-delay="800"
-          data-aos-anchor-placement="top-bottom"
-          id="business-stagger-trigger"
-        >
-          {t("business.description")}
-        </p>
+          <p
+            className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary) leading-relaxed"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            {t("business.introText")}
+          </p>
 
-        {/* Benefits Card - Second element */}
-        <div
-          className="flex flex-col gap-4 bg-white rounded-md drop-shadow-lg p-6 w-full"
-          data-aos="fade-down"
-          data-aos-delay="950"
-          data-aos-anchor="#business-stagger-trigger"
-          data-aos-anchor-placement="top-bottom"
-        >
-          <h1 className="font-semibold text-(--color-dark-text) dark:text-white">
-            {t("business.benefitsTitle")}
-          </h1>
-          <div className="grid grid-cols-2 gap-3 gap-x-5">
-            {benefitsCardsData.map((item, index) => (
-              <div
-                className="flex flex-row items-start justify-start gap-2"
-                key={index}
-              >
-                <i
-                  className={`${item.icon} mt-1 text-sm text-(--color-primary)`}
-                ></i>
-                <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
-                  {item.text}
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mt-2">
+            {/* Understanding Concept */}
+            <div
+              className="bg-white p-5 rounded-md drop-shadow-sm/10 border border-(--color-divider)/40 flex flex-col gap-2"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div className="flex items-center gap-2 text-(--color-primary)">
+                <i className="fa-solid fa-lightbulb"></i>
+                <h2 className="font-semibold text-(--color-dark-text) dark:text-white text-sm">
+                  {t("business.understandingTitle")}
+                </h2>
               </div>
-            ))}
+              <p className="text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary) leading-relaxed">
+                {t("business.understandingDesc")}
+              </p>
+            </div>
+
+            {/* Importance Concept */}
+            <div
+              className="bg-white p-5 rounded-md drop-shadow-sm/10 border border-(--color-divider)/40 flex flex-col gap-2"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div className="flex items-center gap-2 text-(--color-gold)">
+                <i className="fa-solid fa-arrow-trend-up"></i>
+                <h2 className="font-semibold text-(--color-dark-text) dark:text-white text-sm">
+                  {t("business.importanceTitle")}
+                </h2>
+              </div>
+              <p className="text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary) leading-relaxed">
+                {t("business.importanceDesc")}
+              </p>
+            </div>
+
+            {/* Forms Concept */}
+            <div
+              className="bg-white p-5 rounded-md drop-shadow-sm/10 border border-(--color-divider)/40 flex flex-col gap-2 md:col-span-2"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div className="flex items-center gap-2 text-(--color-secondary)">
+                <i className="fa-solid fa-shapes"></i>
+                <h2 className="font-semibold text-(--color-dark-text) dark:text-white text-sm">
+                  {t("business.formsTitle")}
+                </h2>
+              </div>
+              <p className="text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary) leading-relaxed">
+                {t("business.formsDesc")}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Steps Title - Third element */}
-        <h1
-          className="font-semibold text-(--color-dark-text) dark:text-white"
-          data-aos="fade-down"
-          data-aos-delay="1100"
-          data-aos-anchor="#business-stagger-trigger"
-          data-aos-anchor-placement="top-bottom"
+        {/* Right Content: Image */}
+        <Link
+          to="/ceramics"
+          className="rounded-md overflow-hidden drop-shadow-lg flex-1 sticky top-32"
+          data-aos="zoom-in"
+          data-aos-delay="300"
         >
-          {t("business.stepsTitle")}
-        </h1>
-
-        {/* Steps Cards - Each staggered individually */}
-        <div className="flex flex-col gap-4 w-full">
-          {stepsCardsData.map((card, index) => (
-            <div
-              className="flex flex-row items-center justify-start bg-white drop-shadow-lg flex-1 rounded-md p-3 gap-2"
-              key={index}
-              data-aos="fade-down"
-              data-aos-delay={1250 + index * 150}
-              data-aos-anchor="#business-stagger-trigger"
-              data-aos-anchor-placement="top-bottom"
-            >
-              <div className="flex items-center justify-center bg-(--color-light3-text)/70 rounded-full w-6 h-6 shrink-0">
-                <p className="font-medium text-(--color-dark-text) dark:text-white text-sm">
-                  {card.order}
-                </p>
-              </div>
-              <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
-                {card.text}
-              </p>
-            </div>
-          ))}
-        </div>
+          <img
+            src={businessBanner}
+            alt="Ceramics workshop entrepreneurship"
+            className="w-full h-full max-h-100 object-cover rounded-md transition-transform duration-500 ease-in-out hover:scale-105"
+          />
+        </Link>
       </div>
 
-      {/* Right image - fixed delay like PrefaceSection */}
-      <Link
-        to="/ceramics"
-        className="rounded-md overflow-hidden drop-shadow-lg flex-1"
-        data-aos="fade-down"
-        data-aos-delay="1250"
-        data-aos-anchor="#business-stagger-trigger"
-        data-aos-anchor-placement="top-bottom"
+      {/* Bottom Section: 10-Stage Table */}
+      <div
+        className="flex flex-col gap-4 w-full mt-4"
+        data-aos="fade-up"
+        data-aos-delay="200"
       >
-        <img
-          src={businessBanner}
-          alt="Ceramics workshop"
-          className="w-full h-full object-cover rounded-md transition-transform duration-400 ease-in-out hover:scale-105"
-        />
-      </Link>
+        <div className="flex flex-col gap-1.5">
+          <h2 className="font-semibold text-lg text-(--color-dark-text) dark:text-white">
+            {t("business.stepsTitle")}
+          </h2>
+          <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
+            {t("business.stepsDesc")}
+          </p>
+        </div>
+
+        {/* Responsive Table Container */}
+        <div className="overflow-x-auto bg-white rounded-md drop-shadow-lg border border-(--color-divider)/50 mt-2">
+          <table className="w-full text-left border-collapse min-w-200">
+            <thead>
+              <tr className="bg-(--color-bg-primary) text-(--color-dark-text) dark:text-white text-sm border-b border-(--color-divider)/50">
+                <th className="p-4 font-semibold w-1/5">Stage</th>
+                <th className="p-4 font-semibold w-1/3">
+                  What the Teacher Does
+                </th>
+                <th className="p-4 font-semibold w-1/4">Tools / Materials</th>
+                <th className="p-4 font-semibold w-1/4">Expected Outcome</th>
+              </tr>
+            </thead>
+            <tbody className="text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary)">
+              {entrepreneurshipStepsData?.map((step, index) => (
+                <tr
+                  key={index}
+                  className="border-b border-(--color-divider)/30 hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors"
+                >
+                  <td className="p-4 font-medium text-(--color-primary) align-top">
+                    {step.stage}
+                  </td>
+                  <td className="p-4 align-top leading-relaxed">
+                    {step.teacher}
+                  </td>
+                  <td className="p-4 align-top text-slate-500 dark:text-slate-400">
+                    <i className="fa-solid fa-wrench text-[10px] mr-1.5 opacity-50"></i>
+                    {step.tools}
+                  </td>
+                  <td className="p-4 align-top font-medium text-emerald-600 dark:text-emerald-400">
+                    {step.outcome}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
   );
 };

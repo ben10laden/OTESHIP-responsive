@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const LawSection = () => {
   const { t } = useTranslation("guide");
   const BASE_DELAY = 300;
-  const rights = t("law.rights", { returnObjects: true });
+  const rights = t("law.unRights", { returnObjects: true });
+
+  // Tab state: 'greece', 'poland', or 'turkey'
+  const [activeTab, setActiveTab] = useState("greece");
+
   return (
     <section
       className="flex flex-col items-start gap-8 scroll-mt-32 bg-white drop-shadow-lg rounded-md p-8"
       id="legislation"
     >
+      {/* Intro & UN Rights */}
       <div className="flex flex-col gap-6" data-aos="fade-up">
         <div className="flex flex-row items-center justify-start gap-2">
           <div className="bg-(--color-primary)/20 w-10 h-10 flex items-center justify-center text-(--color-primary) rounded-md">
@@ -20,53 +25,73 @@ const LawSection = () => {
           </h1>
         </div>
         <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
-          {t("law.description")}
+          {t("law.introText")}
         </p>
       </div>
-      <div className="flex flex-row items-stretch justify-between w-full gap-8">
-        <div
-          data-aos="fade-down"
-          data-aos-delay={BASE_DELAY}
-          className="flex-1 flex flex-col gap-4 bg-(--color-bg-primary) drop-shadow-sm/10 p-4 outline-1 outline-(--color-light3-text)/40 rounded-md"
-        >
-          <div className="flex flex-row items-center justify-start gap-2">
-            <i className="fa-regular fa-circle-check text-(--color-primary)"></i>
-            <h1 className="font-medium text-(--color-dark-text) dark:text-white">
-              {t("law.rightsTitle")}
-            </h1>
-          </div>
-          <div className="flex flex-col text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary) ml-1">
-            <ul className="list-disc list-outside ml-4 space-y-3 [&>li::marker]:text-(--color-primary)">
-              {rights.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
+
+      {/* UN Rights List */}
+      <div
+        data-aos="fade-down"
+        data-aos-delay={BASE_DELAY}
+        className="w-full flex flex-col gap-4 bg-(--color-bg-primary) drop-shadow-sm/10 p-5 outline-1 outline-(--color-light3-text)/40 rounded-md"
+      >
+        <div className="flex flex-row items-center justify-start gap-2">
+          <i className="fa-solid fa-globe text-(--color-primary)"></i>
+          <h1 className="font-medium text-(--color-dark-text) dark:text-white">
+            {t("law.unRightsTitle")}
+          </h1>
+        </div>
+        <div className="flex flex-col text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary) ml-1">
+          <ul className="list-disc list-outside ml-4 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 [&>li::marker]:text-(--color-primary)">
+            {rights.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Country-Specific Legislation Tabs */}
+      <div
+        className="w-full flex flex-col gap-4"
+        data-aos="fade-down"
+        data-aos-delay={BASE_DELAY + 150}
+      >
+        <div className="flex flex-row border-b border-(--color-divider)">
+          {["greece", "poland", "turkey"].map((country) => (
+            <button
+              key={country}
+              onClick={() => setActiveTab(country)}
+              className={`px-4 py-2 font-medium text-sm transition-colors relative ${
+                activeTab === country
+                  ? "text-(--color-primary)"
+                  : "text-(--color-bg-dark) hover:text-(--color-primary)/70"
+              }`}
+            >
+              {t(`law.tabs.${country}`)}
+              {activeTab === country && (
+                <div className="absolute -bottom-px left-0 w-full h-0.5 bg-(--color-primary)"></div>
+              )}
+            </button>
+          ))}
         </div>
 
-        <div
-          data-aos="fade-down"
-          data-aos-delay={BASE_DELAY + 150}
-          className="flex-1 flex flex-col gap-4 bg-(--color-bg-primary) drop-shadow-sm/10 p-4 outline-1 outline-(--color-light3-text)/40 rounded-md"
-        >
-          <div className="flex flex-row items-center justify-start gap-2">
-            <i className="fa-solid fa-building-columns text-(--color-gold)"></i>
-            <h1 className="font-medium text-(--color-dark-text) dark:text-white">
-              {t("law.lawCardTitle")}
-            </h1>
-          </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary)">
-              {t("law.lawCardDesc")}
+        {/* Dynamic Content based on active tab */}
+        <div className="bg-white p-5 rounded-md outline-1 outline-(--color-light3-text)/40 drop-shadow-sm/5 min-h-30">
+          <div className="flex flex-row items-start gap-3">
+            <i
+              className={`fa-solid fa-flag mt-1 ${
+                activeTab === "greece"
+                  ? "text-blue-600"
+                  : activeTab === "poland"
+                    ? "text-red-500"
+                    : "text-red-600"
+              }`}
+            ></i>
+            <p className="text-sm text-(--color-dark-text) dark:text-white leading-relaxed">
+              {activeTab === "greece" && t("law.grLaw")}
+              {activeTab === "poland" && t("law.plLaw")}
+              {activeTab === "turkey" && t("law.trLaw")}
             </p>
-            <div className="flex flex-col bg-white gap-2 p-4 rounded-md outline-1 outline-(--color-light3-text)/40 drop-shadow-sm/5">
-              <h1 className="uppercase text-sm font-medium text-(--color-secondary)">
-                {t("law.lawTitle")}
-              </h1>
-              <p className="text-sm text-(--color-dark-text) dark:text-white">
-                {t("law.lawDesc")}
-              </p>
-            </div>
           </div>
         </div>
       </div>

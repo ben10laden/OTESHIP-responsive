@@ -9,11 +9,15 @@ import impactNumbersData from "../data/About/impactNumbersData";
 import processCardsData from "../data/About/processCardsData";
 import schoolData from "../data/About/schoolData";
 import successCardsData from "../data/Guide/successCardsData";
-import skillsCardsData from "../data/Guide/skillsCardsData";
+import skillsData from "../data/Guide/skillsData"; // Updated
 import benefitsCardsData from "../data/Guide/benefitsCardsData";
-import stepsCardsData from "../data/Guide/stepsCardsData";
+import entrepreneurshipStepsData from "../data/Guide/entrepreneurshipStepsData"; // New
 import familyCardsData from "../data/Guide/familyCardsData";
 import munCardsData from "../data/Guide/munCardsData";
+import proposalsData from "../data/Guide/proposalsData"; // New
+import businessDemandsData from "../data/Guide/businessDemandsData"; // New
+import goodPracticesData from "../data/Guide/goodPracticesData"; // New
+import toolkitData from "../data/Guide/toolkitData"; // New
 import workshopData from "../data/Workshops/workshopData";
 
 export const useLanguageData = () => {
@@ -36,11 +40,15 @@ export const useLanguageData = () => {
     impactNumbersData: getData(impactNumbersData),
     schoolData: getData(schoolData),
     successCardsData: getData(successCardsData),
-    skillsCardsData: getData(skillsCardsData),
+    skillsData: getData(skillsData),
     benefitsCardsData: getData(benefitsCardsData),
-    stepsCardsData: getData(stepsCardsData),
+    entrepreneurshipStepsData: getData(entrepreneurshipStepsData),
     familyCardsData: getData(familyCardsData),
     munCardsData: getData(munCardsData),
+    proposalsData: getData(proposalsData),
+    businessDemandsData: getData(businessDemandsData),
+    goodPracticesData: getData(goodPracticesData),
+    toolkitData: getData(toolkitData),
     workshopData: getData(workshopData),
   };
 };

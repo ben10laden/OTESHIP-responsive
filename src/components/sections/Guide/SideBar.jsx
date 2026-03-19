@@ -1,4 +1,3 @@
-// src/components/layouts/SideBar.jsx
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -7,14 +6,10 @@ const SideBar = () => {
 
   const handleEmploymentClick = (e, cardType) => {
     e.preventDefault();
-
-    // Scroll to employment section
     const employmentSection = document.getElementById("employment");
     if (employmentSection) {
       employmentSection.scrollIntoView({ behavior: "smooth" });
     }
-
-    // Trigger the card animation if the function exists
     if (window.animateEmploymentCard) {
       window.animateEmploymentCard(cardType);
     }
@@ -25,57 +20,44 @@ const SideBar = () => {
       className="flex flex-col h-full w-full drop-shadow-lg/10"
       data-aos="fade-right"
     >
-      {/* First section - stays at top */}
+      {/* Header */}
       <div className="flex flex-col gap-2 p-5 bg-(--color-bg-primary) dark:bg-(--color-bg-dark) rounded-t-md border-b border-(--color-light3-text)/40">
-        <div className="flex flex-row items-center justify-start gap-2.5 ">
+        <div className="flex flex-row items-center justify-start gap-2.5">
           <div className="bg-(--color-primary) dark:bg-(--color-primary2) rounded-md p-1.5 text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-book-open-icon lucide-book-open"
-            >
-              <path d="M12 7v14" />
-              <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
-            </svg>
+            <i className="fa-solid fa-book-open"></i>
           </div>
           <h1 className="font-bold text-lg text-(--color-dark-text) dark:text-white">
             {t("sidebar.title")}
           </h1>
         </div>
-
         <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary) max-w-60">
           {t("sidebar.subTitle")}
         </p>
       </div>
 
-      {/* Navigation section - scrollable if needed */}
+      {/* Navigation Links */}
       <div className="border-b border-(--color-light3-text)/40 bg-white dark:bg-(--color-dark-text) flex flex-col gap-1.5 p-5 overflow-y-auto [&_a]:hover:bg-(--color-primary)/5 [&_a_i]:text-slate-900/55 [&_a:hover_i]:text-(--color-primary) [&_a]:hover:text-(--color-primary) [&_a]:p-1.5 [&_a]:px-3 [&_a]:rounded-md">
         <a
           href="#preface"
           className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
         >
-          <i className="fa-regular fa-comment text-sm"></i>
+          <i className="fa-regular fa-comment text-sm"></i>{" "}
           {t("sidebar.preface")}
         </a>
         <a
           href="#legislation"
           className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
         >
-          <i className="fa-solid fa-scale-balanced text-sm"></i>
+          <i className="fa-solid fa-scale-balanced text-sm"></i>{" "}
           {t("sidebar.legislation")}
         </a>
+
+        {/* Employment Group */}
         <a
           href="#employment"
           className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
         >
-          <i className="fa-solid fa-briefcase text-sm"></i>
+          <i className="fa-solid fa-briefcase text-sm"></i>{" "}
           {t("sidebar.employment")}
         </a>
         <div className="text-sm flex flex-col ml-6.5 [&_a]:hover:bg-transparent [&_a]:text-(--color-dark2-text)">
@@ -101,41 +83,62 @@ const SideBar = () => {
             {t("sidebar.freelance")}
           </a>
         </div>
+
         <a
           href="#skills"
           className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
         >
-          <i className="fa-solid fa-graduation-cap text-sm"></i>
+          <i className="fa-solid fa-graduation-cap text-sm"></i>{" "}
           {t("sidebar.skills")}
         </a>
         <a
           href="#entrepreneurship"
           className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
         >
-          <i className="fa-solid fa-rocket text-sm"></i>
-          {t("sidebar.business")}
+          <i className="fa-solid fa-rocket text-sm"></i> {t("sidebar.business")}
         </a>
         <a
           href="#family_municipality"
           className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
         >
-          <i className="fa-solid fa-user-group text-sm"></i>
+          <i className="fa-solid fa-user-group text-sm"></i>{" "}
           {t("sidebar.municipality")}
+        </a>
+
+        {/* NEW SECTIONS */}
+        <a
+          href="#entrepreneurs"
+          className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
+        >
+          <i className="fa-solid fa-comments text-sm"></i>{" "}
+          {t("sidebar.entrepreneurs")}
+        </a>
+        <a
+          href="#good-practices"
+          className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
+        >
+          <i className="fa-solid fa-star text-sm"></i>{" "}
+          {t("sidebar.goodPractices")}
+        </a>
+        <a
+          href="#toolkit"
+          className="flex flex-row items-center justify-start gap-2 text-(--color-dark-text) dark:text-white"
+        >
+          <i className="fa-solid fa-toolbox text-sm"></i> {t("sidebar.toolkit")}
         </a>
       </div>
 
+      {/* Footer */}
       <div className="bg-(--color-bg-primary) dark:bg-(--color-bg-dark) p-5 border-b border-(--color-light3-text)/40">
         <div className="flex flex-row justify-start items-center gap-3">
           <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center">
             <span className="fi fi-eu text-4xl block scale-135"></span>
           </div>
-
           <h1 className="text-(--color-bg-dark) dark:text-(--color-bg-primary) text-xs max-w-40">
             {t("sidebar.footer")}
           </h1>
         </div>
       </div>
-      {/* Spacer div - fills all remaining space with white background */}
       <div className="bg-white dark:bg-(--color-dark-text) flex-1 rounded-b-md"></div>
     </aside>
   );

@@ -1,73 +1,46 @@
 const successCardsData = {
   en: [
     {
+      icon: "fa-solid fa-hand-holding-heart",
+      title: "IASIS",
+      description:
+        "Non-profit organization active in mental health, social inclusion, and education for individuals on the autism spectrum.",
+    },
+    {
+      icon: "fa-solid fa-puzzle-piece",
+      title: "ALMA (Kastoria)",
+      description:
+        "Programs of creative engagement, education, and social inclusion for individuals with autism.",
+    },
+    {
       icon: "fa-solid fa-mug-hot",
       title: "Myrtillo Café",
-      description: "90% of employees are disabled.",
+      description:
+        "Social enterprise in Athens where over 90% of employees are persons with disabilities.",
+    },
+    {
+      icon: "fa-solid fa-store",
+      title: "M.A.N.A (KoinSEP)",
+      description:
+        "Established by parents, creating a welcoming café environment for persons with disabilities.",
     },
     {
       icon: "fa-solid fa-masks-theater",
-      title: "THEAMA Theater",
-      description: "Professional inclusion in culture.",
+      title: "THEAMA Inclusive Theater",
+      description:
+        "Professional theatre company promoting inclusion and employment in the cultural performing arts.",
     },
     {
-      icon: "fa-solid fa-universal-access",
-      title: "ALMA Co., Ltd.",
-      description: "Activities for people with autism.",
-    },
-  ],
-
-  ελ: [
-    {
-      icon: "fa-solid fa-mug-hot",
-      title: "Καφέ Μυρτίλλο",
-      description: "Το 90% των εργαζομένων είναι άτομα με αναπηρία.",
+      icon: "fa-solid fa-shop",
+      title: "Epomeni Stasi",
+      description:
+        "Café-restaurant and mini-market in Thessaloniki employing majority deaf and hard-of-hearing individuals.",
     },
     {
-      icon: "fa-solid fa-masks-theater",
-      title: "Θέατρο ΘΕΑΜΑ",
-      description: "Επαγγελματική ένταξη στον χώρο του πολιτισμού.",
-    },
-    {
-      icon: "fa-solid fa-universal-access",
-      title: "ALMA ΕΠΕ",
-      description: "Δραστηριότητες για άτομα με αυτισμό.",
-    },
-  ],
-
-  pl: [
-    {
-      icon: "fa-solid fa-mug-hot",
-      title: "Kawiarnia Myrtillo",
-      description: "90% pracowników to osoby z niepełnosprawnościami.",
-    },
-    {
-      icon: "fa-solid fa-masks-theater",
-      title: "Teatr THEAMA",
-      description: "Profesjonalna integracja w kulturze.",
-    },
-    {
-      icon: "fa-solid fa-universal-access",
-      title: "ALMA Sp. z o.o.",
-      description: "Działania dla osób z autyzmem.",
-    },
-  ],
-
-  tr: [
-    {
-      icon: "fa-solid fa-mug-hot",
-      title: "Myrtillo Kafe",
-      description: "Çalışanların %90’ı engelli bireylerden oluşmaktadır.",
-    },
-    {
-      icon: "fa-solid fa-masks-theater",
-      title: "THEAMA Tiyatrosu",
-      description: "Kültür alanında profesyonel kapsayıcılık.",
-    },
-    {
-      icon: "fa-solid fa-universal-access",
-      title: "ALMA Ltd.",
-      description: "Otizmli bireyler için faaliyetler.",
+      icon: "fa-solid fa-plane-departure",
+      title: "Tourism Collaboration (SETE)",
+      description:
+        "Creating professional opportunities for young individuals on the autism spectrum within the Greek hospitality sector.",
     },
   ],
 };

@@ -1,15 +1,17 @@
 {
   "hero": {
     "tag": "erasmus+ project",
-    "title": "Guide to Practices for the Development and Promotion of Entrepreneurship",
+    "title": "Guide to the Development and Promotion of Entrepreneurship",
     "description": "In Special Schools: A Comprehensive Guide for Educators, Parents, and Stakeholders.",
     "startReading": "Start Reading"
   },
   "preface": {
-    "title": "Preface",
+    "title": "Foreword",
     "paragraphs": [
-      "The guide you are reading was created as part of the implementation of the approved European programme Erasmus+ entitled <b>“Our tradition… our entrepreneurship!”.</b>",
-      "Our basic idea was to combine local tradition with students’ skills. Through ceramics and art workshops, students worked on new techniques, exchanged ideas, and created products inspired by the culture of each region."
+      "The present guide was developed within the framework of the approved European Erasmus+ programme entitled <b>“Our Tradition… Our Entrepreneurship!”</b>.",
+      "The programme was designed with the objective of bringing students with disabilities closer to the concept of entrepreneurship by utilizing their abilities and talents through creative activities implemented in school workshops.",
+      "The core idea was to combine local tradition with students’ skills. Through ceramics and visual arts workshops carried out in all participating schools, students worked on new techniques, exchanged ideas, and created products inspired by the culture and traditions of each region.",
+      "This collaboration brought together students, educators, and specialists from three different countries, creating a valuable experience of knowledge exchange, technical expertise, and good practices."
     ],
     "bodiesTitle": "Collaborating Bodies:",
     "bodies": [
@@ -19,73 +21,129 @@
     ]
   },
   "law": {
-    "title": "Legislation & Rights",
-    "description": "The UN has adopted the Convention on the Rights of Persons with Disabilities. Regarding work, Article 27 recognizes that persons with disabilities have the same right to employment as any other citizen.",
-    "rightsTitle": "Basic Rights",
-    "rights": [
-      "Elimination of discrimination at every stage of employment.",
-      "Protection for fair wages and equal opportunities.",
-      "Access to career guidance and training.",
-      "Adaptation of workplaces to the needs of persons with disabilities."
+    "title": "Legislation on the Employment of Persons with Disabilities",
+    "introText": "Since 1975, the United Nations has emphasized that persons with disabilities have the right to vocational training, rehabilitation, counselling, and employment placement in order to fully develop their abilities and actively participate in society.",
+    "unRightsTitle": "UN Convention on the Rights of Persons with Disabilities (CRPD) - Article 27",
+    "unRights": [
+      "The elimination of discrimination on the basis of disability in all stages of employment.",
+      "Protection of rights to fair wages, equal opportunities, and safe and healthy working conditions.",
+      "Equal access to labour and trade union rights.",
+      "Access to vocational guidance, training, and lifelong learning.",
+      "Promotion of employment opportunities, career advancement, and support.",
+      "Promotion of self-employment and entrepreneurship.",
+      "Employment in the public sector and incentives for private sector employment.",
+      "Reasonable accommodation of workplaces.",
+      "Opportunities for work experience in the open labour market.",
+      "Vocational rehabilitation and job retention programmes."
     ],
-    "lawCardTitle": "Greek Legislation",
-    "lawCardDesc": "According to the Constitution (Article 21, par. 6), people with disabilities have the right to professional integration.",
-    "lawTitle": "Law 2643/1998",
-    "lawDesc": "Businesses with over 50 people are required to hire 8% of people with disabilities."
+    "tabs": {
+      "greece": "Greece",
+      "poland": "Poland",
+      "turkey": "Turkey"
+    },
+    "grLaw": "According to the Constitution of Greece, work constitutes a fundamental right (Article 22). Article 21 states that persons with disabilities have the right to benefit from measures ensuring their autonomy and professional integration. Enterprises employing over 50 people are obliged to recruit protected persons at a rate of 8% of their workforce (Law 2643/1998).",
+    "plLaw": "According to the Labor Code, an employer cannot discriminate against an employee based on disability. The main institution supporting employment is the State Fund for the Rehabilitation of Disabled Persons (PFRON), which offers salary subsidies, workplace adaptation reimbursement, and vocational training funding.",
+    "trLaw": "Disability employment is primarily grounded in Article 30 of Labour Law No. 4857. Private-sector employers with 50+ employees must employ at least 3% persons with disabilities, while public-sector employers must employ 4%. Fines for non-compliance are used by İŞKUR to finance entrepreneurship grants, vocational trainings, and sheltered workplaces."
   },
   "employment": {
-    "title": "Type of Employment",
+    "title": "Types of Employment",
+    "introText": "Research findings indicate that labour market integration remains a complex process. Disability does not refer solely to visible physical impairments; it also includes intellectual or psychosocial difficulties, where marginalization is frequently even more pronounced.",
 
     "puTitle": "Public Sector",
-    "puDesc": "Recruitment through ASEP with special points or announcements exclusively for people with disabilities (e.g. 6K/2024).",
-    "puBenefits": ["KEPA Certificate", "5% Quota in general positions"],
+    "puDesc": "Employment in the public sector is possible following relevant calls for applications (e.g., ASEP in Greece, EKPSS in Turkey). Certain notices are addressed exclusively to persons with disabilities, while others mandate a specific quota (e.g., 5% of available positions).",
 
     "prTitle": "Private Sector",
-    "prDesc": "Businesses, KINSEP and NGOs. 8% recruitment obligation for large companies.",
+    "prDesc": "Private companies, Social Cooperative Enterprises (KoinSEP), and non-profit organizations create employment opportunities or supported employment schemes.",
     "prSubtitle": "Integration Steps:",
     "prSteps": [
-      "Skills training",
-      "Supported employment",
-      "Position adjustment"
+      "Education and Skills Development",
+      "Supported Employment",
+      "Workplace Adaptation",
+      "Cooperation with Institutions and Organisations"
     ],
+    "successTitle": "Initiative Examples from the Greek Context",
 
-    "frTitle": "Freelancing",
-    "frDesc": "Possibility of self-employment with significant tax breaks.",
-    "frBenefits": ["Solidarity contribution exemption", "Tax & Deductions"],
-
-    "successTitle": "Indicative Examples of Success"
+    "frTitle": "Self-Employment",
+    "frDesc": "Persons with disabilities may pursue self-employment, offering greater flexibility and autonomy to adapt professional activities to their abilities.",
+    "frBenefitsTitle": "Tax Reductions & Exemptions (Greece Example):",
+    "frBenefits": [
+      "Exemption from solidarity contribution (80%+ disability).",
+      "Tax reduction of €200 automatically applied (67%+ disability).",
+      "Exemption or reduction in presumptive taxation (imputed income)."
+    ],
+    "personalAssistantTitle": "The Role of the Personal Assistant",
+    "personalAssistantDesc": "The Personal Assistant (e.g., Law 4837/2021 in Greece) is a modern support mechanism. Their role is not to replace the individual but to provide support for greater autonomy and safety. In the workplace, they assist with organizing daily tasks, mobility, and communication, strengthening job retention and creating positive conditions for both employee and employer."
   },
   "skills": {
-    "title": "Acquisition of Professional Skills"
+    "title": "Acquisition of Vocational Skills",
+    "introText": "Educational and vocational pathways differ across countries, but all aim to equip students with disabilities with the practical and social skills needed for professional integration.",
+    "tabs": {
+      "greece": "Greece",
+      "poland": "Poland",
+      "turkey": "Turkey"
+    }
   },
   "business": {
-    "title": "Entrepreneurship in Special Schools",
-    "description": "Entrepreneurship is not just an activity, but a mechanism for strengthening students’ active participation in society.",
-    "benefitsTitle": "Benefits for Students",
-    "stepsTitle": "Implementation Steps"
+    "title": "The Development of Entrepreneurship in Special Schools",
+    "introText": "Entrepreneurship is not simply another school activity. It is a practical way to help students with disabilities take a more active role in society, connecting what they learn at school with the world of work.",
+    "understandingTitle": "Understanding Entrepreneurship",
+    "understandingDesc": "In the educational setting, it means students develop creative, innovative, and practical activities that bring them closer to real processes such as producing, managing, and using products or services.",
+    "importanceTitle": "Importance for Students",
+    "importanceDesc": "It promotes independence, helps access the labour market, expands social networks, and supports lifelong learning and personal development.",
+    "formsTitle": "Forms of Entrepreneurship",
+    "formsDesc": "This can include student initiatives and small school enterprises (e.g., bazaars), youth entrepreneurship networks (e.g., Junior Achievement), collaborations with social organizations, and educational programs with an entrepreneurial focus.",
+    "stepsTitle": "Steps for Implementing Entrepreneurial Activities",
+    "stepsDesc": "Effective preparation is a continuous process of discovering strengths and creating meaningful learning experiences."
   },
   "municipality": {
-    "familyTitle": "The Role of the Family",
-    "familyDesc": "The family is the first and most stable pillar of support.",
-    "munTitle": "The Role of the Municipality",
-    "munDesc": "Municipalities understand local community needs and can create local ecosystems."
+    "title": "Family & Municipality Contribution",
+    "introText": "The development of entrepreneurship develops within a wider social environment. Both the family and the local municipality play an important role in creating opportunities that support inclusive participation.",
+    "familyTitle": "1. The Contribution of the Family",
+    "familyDesc": "The family is the first and most stable source of support. It serves as a source of psychological support, a supportive network during uncertainty, a practical partner in organizing activities, and a social mediator to expand the individual's network.",
+    "munTitle": "2. The Role of the Municipality",
+    "munDesc": "Municipalities are close to citizens and can act as drivers of opportunities through institutional support, educational initiatives, and the creation of local entrepreneurial ecosystems.",
+    "proposalsTitle": "Our Proposals for Local Government"
+  },
+  "entrepreneurs": {
+    "title": "Talking with Entrepreneurs",
+    "introText": "As part of strengthening entrepreneurial culture, a series of meetings and interviews with local entrepreneurs was organized. Students engaged in discussions with professionals and observed real working environments.",
+    "findingsTitle": "Our Findings",
+    "findingsDesc": "Discussions showed that employer attitudes are generally positive, though most had no previous experience with employees with disabilities. Employers emphasized the need for state support (workplace adaptations, accessibility). Experiences show that professional inclusion requires cooperation between schools, businesses, and institutional bodies.",
+    "tableTitle": "What Businesses Ask For vs. What It Means in Practice"
+  },
+  "goodPractices": {
+    "title": "Good Practices in Our Countries",
+    "introText": "Creating real employment opportunities requires cooperation among schools, businesses, public institutions, and local communities. The following examples highlight ways in which education and businesses can work together to create an inclusive environment.",
+    "tabs": {
+      "poland": "Poland",
+      "turkey": "Turkey",
+      "greece": "Greece & Cross-Country"
+    }
+  },
+  "toolkit": {
+    "title": "Appendices: Teacher Toolkit",
+    "introText": "This toolkit provides structured templates and methods to help educators integrate entrepreneurship and vocational training into special education settings.",
+    "tableTitle": "Teacher Toolkit Overview",
+    "sheetsTitle": "Printable Sheets & Templates"
   },
   "footer": {
-    "text": "Erasmus+ Project: \"Our tradition... our entrepreneurship!\" ",
+    "conclusionTitle": "The End",
+    "conclusionText": "Small steps in our schools create equal chances for every student. Through one project, three special schools have come together, reaching many students and opening countless opportunities. The message is clear: every student deserves a chance to learn, grow, and succeed.",
+    "text": "Erasmus+ Project: \"Our tradition... our entrepreneurship!\"",
     "copyright": "&copy; 2024 All Rights Reserved."
   },
   "sidebar": {
     "title": "Erasmus+ Guide",
     "subTitle": "Entrepreneurship development and promotion practices",
-    "preface": "Preface",
+    "preface": "Foreword",
     "legislation": "1. Legislation",
-    "employment": "2. Employment Type",
-    "publicSect": "A. Public Sector",
-    "privateSect": "B. Private Sector",
-    "freelance": "C. Freelancing",
-    "skills": "Skill Acquisition",
-    "business": "Entrepreneurship",
-    "municipality": "Family and Municipality",
+    "employment": "2. Types of Employment",
+    "skills": "3. Acquisition of Skills",
+    "business": "4. Entrepreneurship",
+    "municipality": "5. Family & Municipality",
+    "entrepreneurs": "6. Talking with Entrepreneurs",
+    "goodPractices": "7. Good Practices",
+    "toolkit": "8. Teacher Toolkit",
     "footer": "Co-funded by the Erasmus+ Programme"
   }
 }
