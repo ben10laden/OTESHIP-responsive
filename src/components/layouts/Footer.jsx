@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider - Matches the subtle style of your other sections could also do from-transparent via-(--color-divider) to-transparent*/}
+        {/* Divider - Matches the subtle style of other sections could also do from-transparent via-(--color-divider) to-transparent*/}
         <div className="h-px w-full bg-(--color-divider)"></div>
 
         {/* Bottom Section */}

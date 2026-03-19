@@ -45,12 +45,10 @@
 }
 
 @layer base {
-  /* 1. Top Overscroll (Matches your Navbar perfectly now) */
   html {
     @apply bg-white dark:bg-(--color-bg-dark) transition-colors duration-200;
   }
 
-  /* 2. Bottom Overscroll (Matches your Footer) */
   body {
     font-family: var(--font-sans);
     overflow-x: hidden;
@@ -58,7 +56,6 @@
     @apply shadow-[0_10px_0_0_var(--color-dark-text)] dark:shadow-[0_10px_0_0_black];
   }
 
-  /* 3. The App Container (Covers the body instantly to prevent the blue flash) */
   #root {
     @apply bg-white dark:bg-(--color-dark-text) transition-colors duration-200;
   }

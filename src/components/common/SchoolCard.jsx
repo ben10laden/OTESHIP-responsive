@@ -45,11 +45,11 @@ const SchoolCard = ({ to, image, title, description, country, location }) => {
           {/* The Actual Image */}
           {image && (
             <img
-              ref={imgRef} // 3. Attach the ref here
+              ref={imgRef} // Attach the ref here
               src={image}
               alt={title || "School"}
               onLoad={() => setIsLoaded(true)}
-              onError={() => setIsLoaded(true)} // 4. Fail gracefully if image is broken
+              onError={() => setIsLoaded(true)} // Fail gracefully if image is broken
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-400 ease-in-out ${
                 isLoaded ? "opacity-100" : "opacity-0"
               }`}

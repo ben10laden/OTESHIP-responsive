@@ -51,7 +51,6 @@ const MobileCarouselSkeleton = () => (
         <div className="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-800 animate-pulse"></div>
       </div>
 
-      {/* Buttons matching previous carousels */}
       <div className="flex gap-4">
         <div className="p-2 rounded-full bg-white dark:bg-(--color-dark2-text) shadow-md w-9 h-9 flex items-center justify-center">
           <div className="w-3.5 h-3.5 bg-gray-300 dark:bg-gray-700 rounded-sm animate-pulse"></div>

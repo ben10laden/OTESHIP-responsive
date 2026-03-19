@@ -18,7 +18,6 @@ const WorkshopCardBig = ({
         imagePosition === "right" ? "md:flex-row-reverse" : ""
       }`}
     >
-      {/* ONLY added 'relative' to your exact original classes */}
       <Link
         to="/gallery"
         className="relative w-full md:w-[45%] flex aspect-video max-h-56 sm:max-h-64 md:max-h-none overflow-hidden rounded-md shrink-0"

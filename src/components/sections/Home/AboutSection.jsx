@@ -17,7 +17,7 @@ const AboutSection = () => {
           description={t("about.description")}
         />
 
-        {/* The 4-column math trick happens right here */}
+        {/* 4-column math trick happens right here */}
         <div className="grid grid-cols-1 xs:grid-cols-4 md:grid-cols-3 gap-3 xs:gap-4 md:gap-5 lg:gap-6 xl:gap-8 max-w-7xl w-full mx-auto auto-rows-fr">
           {featureCardsData.map((card, index) => (
             <div

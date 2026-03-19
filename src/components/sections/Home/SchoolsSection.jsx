@@ -19,7 +19,6 @@ const SchoolsSection = () => {
           description={t("schools.description")}
         />
 
-        {/* Added md:max-w-2xl and lg:max-w-7xl here */}
         <div className="flex flex-col sm:grid sm:grid-cols-4 md:flex md:flex-col lg:flex-row items-stretch justify-center gap-3 xs:gap-4 md:gap-5 lg:gap-6 xl:gap-8 w-full max-w-7xl md:max-w-2xl lg:max-w-7xl">
           {schoolCardsData.map((school, index) => (
             <div
