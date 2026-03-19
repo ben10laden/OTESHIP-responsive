@@ -59,8 +59,9 @@ const GalleryImage = ({ src, index, onClick, inCarousel = false }) => {
 };
 
 // Reusable "View More" button using your requested styling
+// Added hidden md:flex so it completely disappears when the carousel is active
 const ShowMoreButton = ({ onClick, text }) => (
-  <div className="flex justify-center w-full mt-6 md:mt-8">
+  <div className="hidden md:flex justify-center w-full mt-6 md:mt-8">
     <button
       onClick={onClick}
       className="text-(--color-primary) text-xs md:text-sm font-semibold no-underline whitespace-nowrap inline-flex items-center justify-center hover-anim cursor-pointer"
@@ -82,7 +83,7 @@ const Gallery = () => {
   });
   const [exhibitionImages, setExhibitionImages] = useState([]);
 
-  // State to track how many images are visible per section
+  // State to track how many images are visible per section (Grid Only)
   const [visibleCounts, setVisibleCounts] = useState({
     workshops: INITIAL_VISIBLE_COUNT,
     gr: INITIAL_VISIBLE_COUNT,
@@ -230,7 +231,6 @@ const Gallery = () => {
     else if (isRightSwipe) showPrev();
   };
 
-  // Handler to load more images for a specific section
   const handleShowMore = (section) => {
     setVisibleCounts((prev) => ({
       ...prev,
@@ -279,15 +279,15 @@ const Gallery = () => {
                       key={`grid-workshop-${index}`}
                       src={image}
                       index={index}
-                      // We pass the full array to lightbox so users can still swipe through unrendered images
                       onClick={() => openLightbox(index, workshopImages)}
                     />
                   ))}
               </div>
 
               <div className="block md:hidden mt-4 md:mt-6 w-full">
+                {/* Full array passed to Carousel */}
                 <Carousel
-                  items={workshopImages.slice(0, visibleCounts.workshops)}
+                  items={workshopImages}
                   renderItem={(image, index) => (
                     <GalleryImage
                       src={image}
@@ -299,7 +299,6 @@ const Gallery = () => {
                 />
               </div>
 
-              {/* Show More Button */}
               {workshopImages.length > visibleCounts.workshops && (
                 <ShowMoreButton
                   onClick={() => handleShowMore("workshops")}
@@ -353,8 +352,9 @@ const Gallery = () => {
                       </div>
 
                       <div className="block md:hidden mt-4 w-full">
+                        {/* Full array passed to Carousel */}
                         <Carousel
-                          items={visibleImages}
+                          items={imagesForCountry}
                           renderItem={(image, index) => (
                             <GalleryImage
                               src={image}
@@ -368,7 +368,6 @@ const Gallery = () => {
                         />
                       </div>
 
-                      {/* Show More Button */}
                       {imagesForCountry.length >
                         visibleCounts[country.code] && (
                         <ShowMoreButton
@@ -407,8 +406,9 @@ const Gallery = () => {
                 </div>
 
                 <div className="block md:hidden mt-4 md:mt-6 w-full">
+                  {/* Full array passed to Carousel */}
                   <Carousel
-                    items={exhibitionImages.slice(0, visibleCounts.exhibitions)}
+                    items={exhibitionImages}
                     renderItem={(image, index) => (
                       <GalleryImage
                         src={image}
@@ -420,7 +420,6 @@ const Gallery = () => {
                   />
                 </div>
 
-                {/* Show More Button */}
                 {exhibitionImages.length > visibleCounts.exhibitions && (
                   <ShowMoreButton
                     onClick={() => handleShowMore("exhibitions")}
@@ -433,7 +432,6 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Lightbox JSX remains completely unchanged */}
       {selectedIndex !== null && activeImages.length > 0 && (
         <div
           className="fixed inset-0 z-3 flex items-center justify-center bg-black/95 backdrop-blur-sm transition-opacity touch-none"
