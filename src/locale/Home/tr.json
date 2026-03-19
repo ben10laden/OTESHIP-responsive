@@ -43,6 +43,10 @@
     "email": "E-posta *",
     "phone": "Telefon Numarası *",
     "message": "Mesaj *",
-    "sendButton": "Mesaj Gönder"
+    "sendButton": "Mesaj Gönder",
+    "successMessage": "Mesaj başarıyla gönderildi.",
+    "errorMessage": "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
+    "sending": "Gönderiliyor...",
+    "invalidEmail": "Lütfen geçerli bir e-posta adresi girin (örn. name@domain.com)"
   }
 }

@@ -43,6 +43,10 @@
     "email": "Adres e-mail *",
     "phone": "Numer telefonu *",
     "message": "Wiadomość *",
-    "sendButton": "Wyślij wiadomość"
+    "sendButton": "Wyślij wiadomość",
+    "successMessage": "Wiadomość została wysłana pomyślnie.",
+    "errorMessage": "Nie udało się wysłać wiadomości. Spróbuj ponownie.",
+    "sending": "Wysyłanie...",
+    "invalidEmail": "Proszę wprowadzić poprawny adres e-mail (np. name@domain.com)"
   }
 }
