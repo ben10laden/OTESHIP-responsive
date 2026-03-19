@@ -72,12 +72,13 @@ const Carousel = ({
     });
   };
 
+  // UPDATED: Wrap around logic
   const handlePrev = () => {
-    if (currentPage > 0) handlePageChange(currentPage - 1);
+    handlePageChange(currentPage === 0 ? totalPages - 1 : currentPage - 1);
   };
 
   const handleNext = () => {
-    if (currentPage < totalPages - 1) handlePageChange(currentPage + 1);
+    handlePageChange(currentPage === totalPages - 1 ? 0 : currentPage + 1);
   };
 
   const onTouchStart = (e) => {
@@ -100,9 +101,9 @@ const Carousel = ({
 
     if (Math.abs(distanceY) > Math.abs(distanceX)) return;
 
-    if (distanceX > minSwipeDistance && currentPage < totalPages - 1)
-      handleNext();
-    if (distanceX < -minSwipeDistance && currentPage > 0) handlePrev();
+    // UPDATED: Removed the boundaries so swiping also wraps
+    if (distanceX > minSwipeDistance) handleNext();
+    if (distanceX < -minSwipeDistance) handlePrev();
   };
 
   return (
@@ -161,7 +162,6 @@ const Carousel = ({
                   index < windowStart ||
                   index >= windowStart + MAX_VISIBLE_PAGES;
 
-                // flex-shrink-0 preserves the track math, preventing squishing
                 let dotClasses =
                   "h-2 rounded-full transition-all duration-300 ease-out flex-shrink-0 ";
 
@@ -169,12 +169,9 @@ const Carousel = ({
                   dotClasses +=
                     "w-6 bg-blue-600 scale-100 opacity-100 cursor-pointer";
                 } else if (isLeftGhost || isRightGhost) {
-                  // Ghost dots shrink slightly to create the 3D rounded edge effect
                   dotClasses +=
                     "w-2 bg-gray-400 dark:bg-gray-500 scale-75 opacity-50 cursor-pointer";
                 } else if (isHidden) {
-                  // THE FIX: Hidden dots keep their physical w-2 space for the track math,
-                  // but visually shrink to scale-0 so they don't get chopped off by the mask!
                   dotClasses +=
                     "w-2 bg-gray-300 dark:bg-gray-600 scale-0 opacity-0 pointer-events-none";
                 } else {
@@ -194,16 +191,11 @@ const Carousel = ({
             </div>
           </div>
 
-          {/* ... Next/Prev Buttons remain exactly the same ... */}
           <div className="flex gap-4">
+            {/* UPDATED: Removed disabled state and conditional opacity/cursor styling */}
             <button
               onClick={handlePrev}
-              disabled={currentPage === 0}
-              className={`p-2 rounded-full bg-white dark:bg-(--color-dark2-text) shadow-md transition-all ${
-                currentPage === 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:scale-110 cursor-pointer"
-              }`}
+              className="p-2 rounded-full bg-white dark:bg-(--color-dark2-text) shadow-md transition-all hover:scale-110 cursor-pointer"
               aria-label="Previous page"
             >
               <svg
@@ -223,12 +215,7 @@ const Carousel = ({
 
             <button
               onClick={handleNext}
-              disabled={currentPage === totalPages - 1}
-              className={`p-2 rounded-full bg-white dark:bg-(--color-dark2-text) shadow-md transition-all ${
-                currentPage === totalPages - 1
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:scale-110 cursor-pointer"
-              }`}
+              className="p-2 rounded-full bg-white dark:bg-(--color-dark2-text) shadow-md transition-all hover:scale-110 cursor-pointer"
               aria-label="Next page"
             >
               <svg
