@@ -1,121 +1,73 @@
 const workshopData = {
   en: [
     {
-      title: "Tactile Discovery & Raw Materials",
+      title: "First Workshop",
       description:
-        "The first workshop focused on the sensory experience of clay. Students explored different textures, temperatures, and consistencies of raw earth materials. This foundational phase allowed participants to communicate through touch, bypassing language barriers.",
-      outcomes: [
-        "Improved sensory integration and fine motor skills",
-        "Non-verbal communication establishment between student groups",
-      ],
+        "The first workshop took place at a special school in Manisa, Turkey. During this visit, participants explored new ways of painting ceramic products. Students experimented with different colors, brushes, and decorative materials. It was a great opportunity to see how simple objects made of clay can become unique pieces through creative painting. The workshop encouraged students to try new ideas and express their personal style.",
     },
     {
-      title: "Building Bridges: Co-Creation",
+      title: "Second Workshop",
       description:
-        "In the second phase, students worked in mixed-nationality pairs to construct larger vessels using coil and slab techniques. This required negotiation, patience, and shared decision-making, fostering deep interpersonal connections.",
-      outcomes: [
-        "Development of collaborative problem-solving strategies",
-        "Creation of unique large-scale collaborative vessels",
-      ],
+        "The second workshop was organized in a special school in Police, Poland. There, the focus was on creating patterns on clay surfaces. Participants learned different techniques for decorating clay before firing it. By using tools and simple objects, students discovered how textures and repeated shapes can transform a plain clay surface into an interesting decorative design.",
     },
     {
-      title: "Glazing & Cultural Motifs",
+      title: "Third Workshop",
       description:
-        "The final workshop explored surface decoration. Students shared traditional patterns from their home countries—Polish folk motifs inspired by Łowicz floral designs and paper cut-art (wycinanki), Turkish İznik tile patterns and Ottoman geometric motifs, and Greek geometric designs—combining them into new, hybrid visual narratives.",
-      outcomes: [
-        "Cross-cultural appreciation and artistic exchange",
-        "Mastery of underglaze techniques",
-      ],
+        "The third workshop took place in the special school of Argos Orestiko, Greece. In this workshop, students experimented with creative ways to make patterns using doilies and other everyday materials. By gently pressing these materials onto the clay, they created detailed textures and decorative effects. In addition, participants explored pattern-making techniques inspired by designs from classical times, discovering how traditional artistic ideas can still inspire modern ceramic creations.",
     },
   ],
 
   ελ: [
     {
-      title: "Αφή & Πρώτες Ύλες",
+      title: "Πρώτο Εργαστήριο",
       description:
-        "Το πρώτο εργαστήριο επικεντρώθηκε στην αισθητηριακή εμπειρία του πηλού. Οι μαθητές εξερεύνησαν διαφορετικές υφές, θερμοκρασίες και συνέπειες πρώτων υλικών γης. Αυτή η βασική φάση επέτρεψε την επικοινωνία μέσω της αφής, παρακάμπτοντας γλωσσικά εμπόδια.",
-      outcomes: [
-        "Βελτίωση αισθητηριακής ολοκλήρωσης και λεπτών κινητικών δεξιοτήτων",
-        "Καθιέρωση μη λεκτικής επικοινωνίας μεταξύ των ομάδων μαθητών",
-      ],
+        "Το πρώτο εργαστήριο πραγματοποιήθηκε σε ένα ειδικό σχολείο στη Μανίσα της Τουρκίας. Κατά τη διάρκεια αυτής της επίσκεψης, οι συμμετέχοντες εξερεύνησαν νέους τρόπους ζωγραφικής κεραμικών προϊόντων. Οι μαθητές πειραματίστηκαν με διαφορετικά χρώματα, πινέλα και διακοσμητικά υλικά. Ήταν μια εξαιρετική ευκαιρία να δουν πώς απλά αντικείμενα από πηλό μπορούν να γίνουν μοναδικά κομμάτια μέσω της δημιουργικής ζωγραφικής. Το εργαστήριο ενθάρρυνε τους μαθητές να δοκιμάσουν νέες ιδέες και να εκφράσουν το προσωπικό τους στυλ.",
     },
     {
-      title: "Γέφυρες Συνεργασίας: Συνδημιουργία",
+      title: "Δεύτερο Εργαστήριο",
       description:
-        "Στη δεύτερη φάση, οι μαθητές εργάστηκαν σε μικτές εθνικότητες ζευγάρια για την κατασκευή μεγαλύτερων σκευών με τεχνικές coil και slab. Αυτό απαιτούσε διαπραγμάτευση, υπομονή και συλλογική λήψη αποφάσεων, ενισχύοντας βαθιές διαπροσωπικές σχέσεις.",
-      outcomes: [
-        "Ανάπτυξη στρατηγικών συνεργατικής επίλυσης προβλημάτων",
-        "Δημιουργία μοναδικών μεγάλων συνεργατικών σκευών",
-      ],
+        "Το δεύτερο εργαστήριο διοργανώθηκε σε ένα ειδικό σχολείο στο Police της Πολωνίας. Εκεί, η εστίαση ήταν στη δημιουργία μοτίβων σε επιφάνειες πηλού. Οι συμμετέχοντες έμαθαν διαφορετικές τεχνικές για τη διακόσμηση του πηλού πριν το ψήσιμο. Χρησιμοποιώντας εργαλεία και απλά αντικείμενα, οι μαθητές ανακάλυψαν πώς οι υφές και τα επαναλαμβανόμενα σχήματα μπορούν να μεταμορφώσουν μια απλή επιφάνεια πηλού σε ένα ενδιαφέρον διακοσμητικό σχέδιο.",
     },
     {
-      title: "Γυάλισμα & Πολιτιστικά Σχέδια",
+      title: "Τρίτο Εργαστήριο",
       description:
-        "Το τελικό εργαστήριο διερεύνησε τη διακόσμηση επιφανειών. Οι μαθητές μοιράστηκαν παραδοσιακά σχέδια από τις χώρες τους — πολωνικά λαϊκά μοτίβα εμπνευσμένα από τα λουλούδια Łowicz και την τέχνη wycinanki, τουρκικά μοτίβα πλακιδίων İznik και οθωμανικά γεωμετρικά σχέδια, ελληνικά γεωμετρικά σχέδια — συνδυάζοντάς τα σε νέες, υβριδικές οπτικές αφηγήσεις.",
-      outcomes: [
-        "Διαπολιτισμική εκτίμηση και καλλιτεχνική ανταλλαγή",
-        "Κατάκτηση τεχνικών υπογυάλωσης",
-      ],
+        "Το τρίτο εργαστήριο πραγματοποιήθηκε στο ειδικό σχολείο του Άργους Ορεστικού στην Ελλάδα. Σε αυτό το εργαστήριο, οι μαθητές πειραματίστηκαν με δημιουργικούς τρόπους για να φτιάξουν μοτίβα χρησιμοποιώντας σεμεδάκια και άλλα καθημερινά υλικά. Πιέζοντας απαλά αυτά τα υλικά πάνω στον πηλό, δημιούργησαν λεπτομερείς υφές και διακοσμητικά εφέ. Επιπλέον, οι συμμετέχοντες εξερεύνησαν τεχνικές δημιουργίας μοτίβων εμπνευσμένες από σχέδια της κλασικής εποχής, ανακαλύπτοντας πώς οι παραδοσιακές καλλιτεχνικές ιδέες μπορούν ακόμα να εμπνεύσουν σύγχρονες κεραμικές δημιουργίες.",
     },
   ],
 
   pl: [
     {
-      title: "Odkrywanie Dotykowe i Surowce",
+      title: "Pierwsze Warsztaty",
       description:
-        "Pierwsze warsztaty koncentrowały się na sensorycznym doświadczeniu gliny. Uczniowie eksplorowali różne tekstury, temperatury i konsystencje surowych materiałów ziemnych. Ta podstawowa faza pozwoliła uczestnikom komunikować się poprzez dotyk, omijając bariery językowe.",
-      outcomes: [
-        "Poprawa integracji sensorycznej i zdolności motorycznych",
-        "Ustanowienie komunikacji niewerbalnej między grupami uczniów",
-      ],
+        "Pierwsze warsztaty odbyły się w szkole specjalnej w Manisie w Turcji. Podczas tej wizyty uczestnicy poznawali nowe sposoby malowania wyrobów ceramicznych. Uczniowie eksperymentowali z różnymi kolorami, pędzlami i materiałami dekoracyjnymi. Była to świetna okazja, aby zobaczyć, jak proste przedmioty z gliny mogą stać się unikalnymi dziełami dzięki kreatywnemu malowaniu. Warsztaty zachęciły uczniów do próbowania nowych pomysłów i wyrażania własnego stylu.",
     },
     {
-      title: "Budowanie Mostów: Współtworzenie",
+      title: "Drugie Warsztaty",
       description:
-        "W drugiej fazie uczniowie pracowali w parach o mieszanej narodowości, aby stworzyć większe naczynia za pomocą technik coil i slab. Wymagało to negocjacji, cierpliwości i wspólnego podejmowania decyzji, wzmacniając głębokie więzi międzyludzkie.",
-      outcomes: [
-        "Rozwój strategii współpracy w rozwiązywaniu problemów",
-        "Tworzenie unikalnych, dużych współtworzonych naczyń",
-      ],
+        "Drugie warsztaty zostały zorganizowane w szkole specjalnej w Policach w Polsce. Tam skupiono się na tworzeniu wzorów na glinianych powierzchniach. Uczestnicy uczyli się różnych technik dekorowania gliny przed jej wypaleniem. Używając narzędzi i prostych przedmiotów, uczniowie odkryli, jak tekstury i powtarzające się kształty mogą przekształcić zwykłą glinianą powierzchnię w ciekawy projekt dekoracyjny.",
     },
     {
-      title: "Szkliwienie i Motywy Kulturowe",
+      title: "Trzecie Warsztaty",
       description:
-        "Ostatnie warsztaty poświęcone były dekoracji powierzchni. Uczniowie dzielili się tradycyjnymi wzorami ze swoich krajów — polskie motywy ludowe inspirowane wzorami kwiatowymi Łowicza i wycinanką, tureckie wzory płytek İznik i motywy geometryczne Osmanów, greckie wzory geometryczne — łącząc je w nowe, hybrydowe narracje wizualne.",
-      outcomes: [
-        "Międzykulturowa wymiana artystyczna i docenienie innych kultur",
-        "Opanowanie technik podszkliwnych",
-      ],
+        "Trzecie warsztaty odbyły się w szkole specjalnej w Argos Orestiko w Grecji. Na tych warsztatach uczniowie eksperymentowali z kreatywnymi sposobami tworzenia wzorów przy użyciu serwetek i innych materiałów codziennego użytku. Delikatnie dociskając te materiały do gliny, stworzyli szczegółowe tekstury i efekty dekoracyjne. Ponadto uczestnicy zgłębiali techniki tworzenia wzorów inspirowane projektami z czasów klasycznych, odkrywając, jak tradycyjne idee artystyczne mogą wciąż inspirować współczesne kreacje ceramiczne.",
     },
   ],
 
   tr: [
     {
-      title: "Dokunsal Keşif & Ham Malzemeler",
+      title: "Birinci Atölye",
       description:
-        "İlk atölye, kilin duyusal deneyimine odaklandı. Öğrenciler farklı dokular, sıcaklıklar ve ham toprak malzemelerin kıvamlarını keşfettiler. Bu temel aşama, katılımcıların dil engellerini aşarak dokunma yoluyla iletişim kurmasını sağladı.",
-      outcomes: [
-        "Duyusal bütünleşme ve ince motor becerilerde gelişim",
-        "Öğrenci grupları arasında sözsüz iletişimin kurulması",
-      ],
+        "İlk atölye Manisa, Türkiye'deki özel bir okulda gerçekleşti. Bu ziyaret sırasında katılımcılar seramik ürünleri boyamanın yeni yollarını keşfettiler. Öğrenciler farklı renkler, fırçalar ve dekoratif malzemelerle deneyler yaptılar. Kilden yapılmış basit nesnelerin yaratıcı boyama yoluyla nasıl eşsiz parçalara dönüşebileceğini görmek için harika bir fırsattı. Atölye, öğrencileri yeni fikirler denemeye ve kişisel tarzlarını ifade etmeye teşvik etti.",
     },
     {
-      title: "Köprüler Kurmak: Ortak Yaratım",
+      title: "İkinci Atölye",
       description:
-        "İkinci aşamada öğrenciler, karışık uyruklu çiftler halinde coil ve slab teknikleri ile daha büyük kaplar yaptılar. Bu süreç müzakere, sabır ve ortak karar almayı gerektirdi ve derin kişilerarası bağlar geliştirdi.",
-      outcomes: [
-        "İş birliği ile problem çözme stratejilerinin geliştirilmesi",
-        "Benzersiz büyük ölçekli ortak çalışmaların oluşturulması",
-      ],
+        "İkinci atölye Police, Polonya'daki özel bir okulda düzenlendi. Orada odak noktası kil yüzeyler üzerinde desenler yaratmaktı. Katılımcılar kili fırınlamadan önce dekore etmek için farklı teknikler öğrendiler. Araçlar ve basit nesneler kullanarak öğrenciler, dokuların ve tekrarlanan şekillerin düz bir kil yüzeyini nasıl ilginç bir dekoratif tasarıma dönüştürebileceğini keşfettiler.",
     },
     {
-      title: "Sırlama & Kültürel Motifler",
+      title: "Üçüncü Atölye",
       description:
-        "Son atölye, yüzey dekorasyonunu keşfetti. Öğrenciler ülkelerinden gelen geleneksel desenleri paylaştı — Polonya halk motifleri, Łowicz çiçek desenleri ve wycinanki; Türk İznik çini desenleri ve Osmanlı geometrik motifleri; Yunan geometrik desenleri — bunları yeni, hibrit görsel anlatılara dönüştürdüler.",
-      outcomes: [
-        "Kültürlerarası takdir ve sanatsal değişim",
-        "Alt sırlama tekniklerinde ustalık",
-      ],
+        "Üçüncü atölye, Yunanistan'ın Argos Orestiko kentindeki özel okulda gerçekleşti. Bu atölyede öğrenciler, danteller ve diğer günlük malzemeleri kullanarak desenler yapmanın yaratıcı yollarını denediler. Bu malzemeleri kile nazikçe bastırarak detaylı dokular ve dekoratif etkiler yarattılar. Buna ek olarak katılımcılar, klasik dönem tasarımlarından esinlenen desen yapma tekniklerini inceleyerek geleneksel sanatsal fikirlerin modern seramik kreasyonlarına nasıl hala ilham verebileceğini keşfettiler.",
     },
   ],
 };

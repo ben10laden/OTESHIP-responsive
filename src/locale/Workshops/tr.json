@@ -5,7 +5,9 @@
     "exploreWorkshops": "Atölyeleri Keşfet"
   },
   "about": {
-    "title": "İş Birlikçi Seramik Atölyeleri"
+    "title": "İş Birlikçi Seramik Atölyeleri",
+    "desc": "Proje süresince ortak okullar, öğrencilerin ve öğretmenlerin seramik sanatında farklı teknikleri keşfettiği bir dizi uygulamalı atölye düzenledi. Her atölye, katılımcıların hem yaratıcı becerilerini hem de özgüvenlerini geliştirmelerine yardımcı olan yeni fikirler ve pratik deneyimler sundu.",
+    "desc2": "Bu atölyeler sayesinde öğrenciler yeni teknikler öğrenme, fikir alışverişinde bulunma ve kil ile yaratıcı bir şekilde çalışma fırsatı buldu. Bu deneyim, sanatsal faaliyetlerin iş birliğini, kültürel etkileşimi ve beceri gelişimini nasıl destekleyebileceğini gösterirken, aynı zamanda öğrencileri el yapımı seramik ürünlerinin yerel kültürlerini ve topluluklarını nasıl temsil edebileceğini keşfetmeye teşvik etti."
   },
   "gallery": {
     "title": "Öğrenci Galerisi",

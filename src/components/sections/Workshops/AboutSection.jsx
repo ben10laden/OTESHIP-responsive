@@ -26,7 +26,7 @@ const AboutSection = () => {
       id="workshops"
     >
       <div className="flex flex-col justify-between items-center gap-6 md:gap-8 lg:gap-9 xl:gap-10 max-w-7xl mx-auto">
-        <SectionHeader title={t("about.title")} />
+        <SectionHeader title={t("about.title")} description={t("about.desc")} />
         <div className="flex flex-col gap-8 lg:gap-10 xl:gap-12 w-full">
           {workshopData.map((workshop, index) => (
             <WorkshopCardBig
@@ -40,6 +40,7 @@ const AboutSection = () => {
             />
           ))}
         </div>
+        <SectionHeader description={t("about.desc2")} />
       </div>
     </section>
   );
