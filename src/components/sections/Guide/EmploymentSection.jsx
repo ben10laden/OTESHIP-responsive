@@ -15,10 +15,10 @@ const EmploymentSection = () => {
 
   const handleCardAnimation = (cardId) => {
     setAnimatedCard(cardId);
-    // Remove animation class after animation completes
+    // Let's give it 1000ms (1 full second) so you can actually see the smooth fade in and hold
     setTimeout(() => {
       setAnimatedCard(null);
-    }, 350);
+    }, 1000);
   };
 
   // Expose the animation function to the window object for sidebar access
@@ -30,11 +30,14 @@ const EmploymentSection = () => {
   }, []);
 
   const getCardClass = (cardId) => {
+    // Put transition, duration, and the ring thickness (ring-2) in the base
     const baseClass =
-      "bg-white rounded-md drop-shadow-lg p-6 w-full h-full flex flex-col gap-4 transition-transform duration-350 transform-gpu backface-visibility-hidden perspective-1000";
+      "bg-white rounded-md drop-shadow-lg p-6 w-full h-full flex flex-col gap-4 transition-all duration-500 ease-in-out ring-2";
+
+    // Swap ONLY the color conditionally so they never conflict
     return animatedCard === cardId
-      ? `${baseClass} scale-105 ring-2 ring-(--color-primary)/50`
-      : baseClass;
+      ? `${baseClass} ring-(--color-primary)/60`
+      : `${baseClass} ring-transparent`;
   };
 
   return (
@@ -59,14 +62,21 @@ const EmploymentSection = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-8 items-stretch">
         {/* PUBLIC SECTOR */}
         <div data-aos="fade-down" data-aos-delay={BASE_DELAY}>
-          <div className={getCardClass("public")} id="public_sector">
-            <div className="bg-(--color-primary)/20 w-12 h-12 flex items-center justify-center text-(--color-primary) rounded-md shrink-0">
+          <div
+            className={`${getCardClass("public")} relative overflow-hidden`}
+            id="public_sector"
+          >
+            {/* Added: Giant decorative watermark to fill the empty bottom space */}
+            <i className="fa-solid fa-building-columns absolute -left-6 -bottom-6 text-[10rem] text-(--color-primary)/5 pointer-events-none z-0"></i>
+
+            {/* Added relative z-10 to existing content so it sits above the background icon */}
+            <div className="bg-(--color-primary)/20 w-12 h-12 flex items-center justify-center text-(--color-primary) rounded-md shrink-0 relative z-10">
               <i className="fa-solid fa-building-columns text-xl"></i>
             </div>
-            <h1 className="font-semibold text-xl text-(--color-dark-text) dark:text-white">
+            <h1 className="font-semibold text-xl text-(--color-dark-text) dark:text-white relative z-10">
               {t("employment.puTitle")}
             </h1>
-            <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary) leading-relaxed">
+            <p className="text-sm text-(--color-bg-dark) dark:text-(--color-bg-primary) leading-relaxed relative z-10">
               {t("employment.puDesc")}
             </p>
           </div>
@@ -141,7 +151,7 @@ const EmploymentSection = () => {
         <div className="bg-blue-100 dark:bg-blue-800/40 w-12 h-12 rounded-full flex items-center justify-center shrink-0">
           <i className="fa-solid fa-people-arrows text-xl text-blue-700 dark:text-blue-400"></i>
         </div>
-        <div className="flex flex-col gap-1.5 z-10">
+        <div className="flex flex-col gap-1.5 z-2">
           <h2 className="font-medium text-base text-blue-800 dark:text-blue-300">
             {t("employment.personalAssistantTitle")}
           </h2>

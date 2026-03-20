@@ -40,7 +40,7 @@ export default function Index() {
         <ScrollToTopButton />
         <AccessibilityMenu /> {/* Add this */}
         {/* Wrapper that creates the centered region */}
-        <div className="overflow-x-hidden max-w-7xl mx-auto w-full relative flex-1">
+        <div className="max-w-7xl mx-auto w-full relative flex-1">
           {/* Two-column layout within centered region */}
           <div className="flex">
             {/* Sidebar container - takes up space in flow */}
