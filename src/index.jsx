@@ -111,7 +111,7 @@ export default function Index() {
             {/* Desktop Sidebar Container - Takes up space in flow but hidden on mobile */}
             <div className="hidden lg:block lg:w-80 xl:w-96 shrink-0">
               {/* RESTORED: Fixed sidebar positioned exactly within the flow space with overflow-visible */}
-              <div className="fixed top-0 pt-32 bottom-0 lg:w-80 xl:w-96 px-6 sm:px-8 lg:px-6 xl:px-12 pb-12 overflow-visible">
+              <div className="fixed top-0 pt-32 bottom-0 lg:w-80 xl:w-96 pl-6 sm:pl-8 lg:pl-6 xl:px-12 pb-12 overflow-visible">
                 <SideBar />
               </div>
             </div>
