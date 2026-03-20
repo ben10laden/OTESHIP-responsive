@@ -144,6 +144,9 @@
     "entrepreneurs": "6. Talking with Entrepreneurs",
     "goodPractices": "7. Good Practices",
     "toolkit": "8. Teacher Toolkit",
-    "footer": "Co-funded by the Erasmus+ Programme"
+    "footer": "Co-funded by the European Union",
+    "publicSect": "A. Public Sector",
+    "privateSect": "B. Private Sector",
+    "freelance": "C. Self-Employment"
   }
 }

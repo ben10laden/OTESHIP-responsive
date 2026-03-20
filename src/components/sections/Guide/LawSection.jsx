@@ -76,22 +76,48 @@ const LawSection = () => {
         </div>
 
         {/* Dynamic Content based on active tab */}
-        <div className="bg-white p-5 rounded-md outline-1 outline-(--color-light3-text)/40 drop-shadow-sm/5 min-h-30">
+        <div className="bg-white p-5 rounded-md outline-1 outline-(--color-light3-text)/40 drop-shadow-sm/5">
           <div className="flex flex-row items-start gap-3">
             <i
-              className={`fa-solid fa-flag mt-1 ${
+              className={`fa-solid fa-flag mt-1 transition-colors duration-300 ${
                 activeTab === "greece"
                   ? "text-blue-600"
                   : activeTab === "poland"
-                    ? "text-red-500"
+                    ? "text-red-400"
                     : "text-red-600"
               }`}
             ></i>
-            <p className="text-sm text-(--color-dark-text) dark:text-white leading-relaxed">
-              {activeTab === "greece" && t("law.grLaw")}
-              {activeTab === "poland" && t("law.plLaw")}
-              {activeTab === "turkey" && t("law.trLaw")}
-            </p>
+
+            {/* CSS Grid enforces equal height based on the tallest element */}
+            <div className="grid w-full">
+              <p
+                className={`col-start-1 row-start-1 text-sm text-(--color-dark-text) dark:text-white leading-relaxed transition-all duration-300 ${
+                  activeTab === "greece"
+                    ? "opacity-100 visible"
+                    : "opacity-0 invisible pointer-events-none"
+                }`}
+              >
+                {t("law.grLaw")}
+              </p>
+              <p
+                className={`col-start-1 row-start-1 text-sm text-(--color-dark-text) dark:text-white leading-relaxed transition-all duration-300 ${
+                  activeTab === "poland"
+                    ? "opacity-100 visible"
+                    : "opacity-0 invisible pointer-events-none"
+                }`}
+              >
+                {t("law.plLaw")}
+              </p>
+              <p
+                className={`col-start-1 row-start-1 text-sm text-(--color-dark-text) dark:text-white leading-relaxed transition-all duration-300 ${
+                  activeTab === "turkey"
+                    ? "opacity-100 visible"
+                    : "opacity-0 invisible pointer-events-none"
+                }`}
+              >
+                {t("law.trLaw")}
+              </p>
+            </div>
           </div>
         </div>
       </div>

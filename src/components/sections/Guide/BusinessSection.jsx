@@ -1,12 +1,33 @@
-import React from "react";
-import { Link } from "react-router"; // or react-router-dom depending on your setup
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useLanguageData } from "../../../hooks/useLanguageData";
-import businessBanner from "../../../assets/banners/guide-business-banner.webp";
+import { loadRandomWorkshopImages } from "../../../data/Workshops/workshopImages";
 
 const BusinessSection = () => {
   const { t } = useTranslation("guide");
   const { entrepreneurshipStepsData } = useLanguageData();
+
+  // State for the dynamic image
+  const [randomImage, setRandomImage] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Fetch the random image on mount
+  useEffect(() => {
+    const fetchRandomImage = async () => {
+      const images = await loadRandomWorkshopImages(1);
+      if (images && images.length > 0) {
+        setRandomImage(images[0].src);
+      }
+    };
+    fetchRandomImage();
+  }, []);
+
+  useEffect(() => {
+    if (randomImage) {
+      setIsLoaded(false);
+    }
+  }, [randomImage]);
 
   return (
     <section
@@ -14,7 +35,8 @@ const BusinessSection = () => {
       id="entrepreneurship"
     >
       {/* Top Section: Concepts & Image */}
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
+      {/* Changed items-start to items-stretch to force equal height */}
+      <div className="flex flex-col lg:flex-row gap-8 items-stretch w-full">
         {/* Left Content: Concepts */}
         <div className="flex flex-col items-start gap-6 flex-[1.5]">
           <div
@@ -89,18 +111,30 @@ const BusinessSection = () => {
           </div>
         </div>
 
-        {/* Right Content: Image */}
+        {/* Right Content: Dynamic Image (Takes up approx 40% of space and matches left column height) */}
         <Link
           to="/ceramics"
-          className="rounded-md overflow-hidden drop-shadow-lg flex-1 sticky top-32"
+          className="relative rounded-md w-full flex-1 min-h-62.5 lg:min-h-0 self-stretch block overflow-hidden drop-shadow-lg shrink-0 bg-gray-200 dark:bg-gray-800"
           data-aos="zoom-in"
           data-aos-delay="300"
         >
-          <img
-            src={businessBanner}
-            alt="Ceramics workshop entrepreneurship"
-            className="w-full h-full max-h-100 object-cover rounded-md transition-transform duration-500 ease-in-out hover:scale-105"
+          {/* Skeleton Overlay */}
+          <div
+            className={`absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse transition-opacity duration-400 ${
+              isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
           />
+
+          {randomImage && (
+            <img
+              src={randomImage}
+              alt="Ceramics workshop entrepreneurship"
+              onLoad={() => setIsLoaded(true)}
+              className={`absolute inset-0 w-full h-full object-cover rounded-md transition-transform duration-500 ease-in-out hover:scale-105 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          )}
         </Link>
       </div>
 
