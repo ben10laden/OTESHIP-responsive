@@ -99,6 +99,7 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Text Scaling */
 .font-size-large {
   font-size: 120%;
 }
@@ -109,13 +110,53 @@ html {
 
 /* High Contrast Mode */
 .contrast-high {
+  /* Force pure primary colors */
   --color-primary: #0000ff !important;
   --color-primary-hover: #0000cc !important;
   --color-primary2: #0000ff !important;
   --color-primary2-hover: #0000cc !important;
+
+  /* Make darks completely black */
   --color-dark-text: #000000 !important;
+  --color-dark2-text: #000000 !important;
+  --color-secondary: #000000 !important;
+  --color-secondary-light: #000000 !important;
+
+  /* Make backgrounds pure white / black */
   --color-bg-primary: #ffffff !important;
   --color-bg-dark: #000000 !important;
+  --color-divider: #000000 !important;
+
+  /* Ensure light text stays pure white so inverted sections remain readable */
+  --color-light1-text: #ffffff !important;
+  --color-light2-text: #ffffff !important;
+  --color-light3-text: #ffffff !important;
+}
+
+.contrast-high footer {
+  --color-divider: #ffffff !important;
+}
+
+/* Dark Mode High Contrast Overrides */
+.contrast-high.dark,
+.dark .contrast-high {
+  --color-primary: #4da6ff !important; /* Lighter blue for dark mode readability */
+  --color-primary-hover: #80bfff !important;
+  --color-primary2: #4da6ff !important;
+  --color-primary2-hover: #80bfff !important;
+
+  --color-dark-text: #ffffff !important;
+  --color-dark2-text: #ffffff !important;
+  --color-secondary: #ffffff !important;
+  --color-secondary-light: #ffffff !important;
+
+  --color-bg-primary: #000000 !important;
+  --color-bg-dark: #ffffff !important;
+  --color-divider: #ffffff !important;
+
+  --color-light1-text: #000000 !important;
+  --color-light2-text: #000000 !important;
+  --color-light3-text: #000000 !important;
 }
 
 .contrast-high body {
@@ -123,18 +164,10 @@ html {
   color: #000000 !important;
 }
 
-.contrast-high .dark body {
+.contrast-high.dark body,
+.dark .contrast-high body {
   background-color: #000000 !important;
   color: #ffffff !important;
-}
-
-/* Ensure all text meets contrast requirements */
-.contrast-high p,
-.contrast-high h1,
-.contrast-high h2,
-.contrast-high h3,
-.contrast-high span:not([class*="text-"]) {
-  color: inherit !important;
 }
 
 /* Line Spacing */
