@@ -3,7 +3,6 @@ import featureCardsData from "../data/Home/featureCardsData";
 import goalsData from "../data/Home/goalsData";
 import opportunitiesCardsData from "../data/Home/opportunitiesCardsData";
 import schoolCardsData from "../data/Home/schoolCardsData";
-import ceramicsCardsData from "../data/Home/ceramicsCardsData";
 import contactSectionData from "../data/Home/contactSectionData";
 import impactNumbersData from "../data/About/impactNumbersData";
 import processCardsData from "../data/About/processCardsData";
@@ -33,7 +32,6 @@ export const useLanguageData = () => {
     goalsData: getData(goalsData),
     opportunitiesCardsData: getData(opportunitiesCardsData),
     schoolCardsData: getData(schoolCardsData),
-    ceramicsCardsData: getData(ceramicsCardsData),
     contactSectionData: getData(contactSectionData),
     processCardsData: getData(processCardsData),
     impactNumbersData: getData(impactNumbersData),
