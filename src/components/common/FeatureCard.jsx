@@ -37,6 +37,7 @@ const FeatureCard = ({ icon, title, description, to, index }) => {
     h-full
     w-full
     mx-auto
+    no-highlight
   `;
 
   if (index === 0) {
