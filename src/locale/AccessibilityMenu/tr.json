@@ -1,0 +1,33 @@
+{
+  "title": "Erişilebilirlik Seçenekleri",
+  "buttons": {
+    "toggle": "Erişilebilirlik menüsünü aç/kapat",
+    "title": "Erişilebilirlik seçenekleri",
+    "reset": "Varsayılana sıfırla"
+  },
+  "sections": {
+    "fontSize": "Yazı Boyutu",
+    "contrast": "Kontrast",
+    "lineSpacing": "Satır Aralığı"
+  },
+  "options": {
+    "fontSize": {
+      "normal": "Normal",
+      "large": "Büyük",
+      "xlarge": "Çok Büyük"
+    },
+    "contrast": {
+      "normal": "Normal",
+      "high": "Yüksek"
+    },
+    "lineSpacing": {
+      "normal": "Normal",
+      "wide": "Geniş"
+    }
+  },
+  "toggles": {
+    "reduceMotion": "Hareketi azalt",
+    "dyslexiaFont": "Disleksi dostu yazı tipi",
+    "highlightLinks": "Bağlantıları vurgula"
+  }
+}

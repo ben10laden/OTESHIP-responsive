@@ -1,0 +1,33 @@
+{
+  "title": "Opcje dostępności",
+  "buttons": {
+    "toggle": "Przełącz menu dostępności",
+    "title": "Opcje dostępności",
+    "reset": "Przywróć ustawienia domyślne"
+  },
+  "sections": {
+    "fontSize": "Rozmiar czcionki",
+    "contrast": "Kontrast",
+    "lineSpacing": "Interlinia"
+  },
+  "options": {
+    "fontSize": {
+      "normal": "Normalny",
+      "large": "Duży",
+      "xlarge": "Bardzo duży"
+    },
+    "contrast": {
+      "normal": "Normalny",
+      "high": "Wysoki"
+    },
+    "lineSpacing": {
+      "normal": "Normalna",
+      "wide": "Szeroka"
+    }
+  },
+  "toggles": {
+    "reduceMotion": "Ogranicz animacje",
+    "dyslexiaFont": "Czcionka przyjazna dla dyslektyków",
+    "highlightLinks": "Podświetl linki"
+  }
+}

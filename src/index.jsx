@@ -83,7 +83,7 @@ export default function Index() {
           text-white py-3.5 sm:py-4.5 px-2 sm:px-2.5 rounded-r-xl
             drop-shadow-xl cursor-pointer
             transition-all duration-300 ease-in-out
-            flex items-center justify-center
+            flex items-center justify-center no-scale 
             ${isSidebarOpen ? "-translate-x-full opacity-0 pointer-events-none" : "translate-x-0 opacity-100"}`}
           aria-label="Open Guide Menu"
         >

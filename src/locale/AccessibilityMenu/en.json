@@ -1,0 +1,33 @@
+{
+  "title": "Accessibility Options",
+  "buttons": {
+    "toggle": "Toggle accessibility menu",
+    "title": "Accessibility options",
+    "reset": "Reset to Default"
+  },
+  "sections": {
+    "fontSize": "Font Size",
+    "contrast": "Contrast",
+    "lineSpacing": "Line Spacing"
+  },
+  "options": {
+    "fontSize": {
+      "normal": "Normal",
+      "large": "Large",
+      "xlarge": "Extra Large"
+    },
+    "contrast": {
+      "normal": "Normal",
+      "high": "High"
+    },
+    "lineSpacing": {
+      "normal": "Normal",
+      "wide": "Wide"
+    }
+  },
+  "toggles": {
+    "reduceMotion": "Reduce Motion",
+    "dyslexiaFont": "Dyslexia-Friendly Font",
+    "highlightLinks": "Highlight Links"
+  }
+}

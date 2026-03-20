@@ -30,6 +30,11 @@ import grLayouts from "./layouts/gr.json";
 import plLayouts from "./layouts/pl.json";
 import trLayouts from "./layouts/tr.json";
 
+import enAccessibilityMenu from "./AccessibilityMenu/en.json";
+import grAccessibilityMenu from "./AccessibilityMenu/gr.json";
+import plAccessibilityMenu from "./AccessibilityMenu/pl.json";
+import trAccessibilityMenu from "./AccessibilityMenu/tr.json";
+
 const resources = {
   en: {
     home: enHome,
@@ -38,6 +43,7 @@ const resources = {
     workshops: enWorkshops,
     gallery: enGallery,
     layouts: enLayouts,
+    accessibilityMenu: enAccessibilityMenu,
   },
   ελ: {
     home: grHome,
@@ -46,6 +52,7 @@ const resources = {
     workshops: grWorkshops,
     gallery: grGallery,
     layouts: grLayouts,
+    accessibilityMenu: grAccessibilityMenu,
   },
   pl: {
     home: plHome,
@@ -54,6 +61,7 @@ const resources = {
     workshops: plWorkshops,
     gallery: plGallery,
     layouts: plLayouts,
+    accessibilityMenu: plAccessibilityMenu,
   },
   tr: {
     home: trHome,
@@ -62,6 +70,7 @@ const resources = {
     workshops: trWorkshops,
     gallery: trGallery,
     layouts: trLayouts,
+    accessibilityMenu: trAccessibilityMenu,
   },
 };
 
@@ -75,7 +84,15 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
   },
-  ns: ["home", "layouts", "about", "guide", "workshops", "gallery"],
+  ns: [
+    "home",
+    "layouts",
+    "about",
+    "guide",
+    "workshops",
+    "gallery",
+    "accessibilityMenu",
+  ],
 });
 
 export default i18n;
