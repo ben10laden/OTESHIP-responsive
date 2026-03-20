@@ -117,7 +117,7 @@ export default function Index() {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex-1 min-w-0 pb-16">
+            <div className="flex-1 min-w-0">
               <main className="mt-8 xs:mt-10 md:mt-12 lg:mt-13 px-6 sm:px-8 lg:px-6 xl:px-0">
                 <Routes>
                   <Route path="/guide" element={<Guide />} />
