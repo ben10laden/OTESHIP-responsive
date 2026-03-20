@@ -34,12 +34,17 @@ const SectionHeaderSkeleton = ({
   </div>
 );
 
-// Matches the exact Carousel layout used on mobile
+// Matches the Carousel layout breakpoints (1 card < 640px, 2 cards >= 640px)
 const MobileCarouselSkeleton = () => (
-  <div className="block md:hidden mt-4 md:mt-6 w-full">
-    {/* Single visible card for mobile carousel */}
-    <div className="w-full">
-      <GalleryImageSkeleton inCarousel={true} />
+  <div className="block lg:hidden mt-4 md:mt-6 w-full">
+    {/* Dynamic cards matching Carousel.jsx sm threshold */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 w-full">
+      <div className="block w-full">
+        <GalleryImageSkeleton inCarousel={true} />
+      </div>
+      <div className="hidden sm:block w-full">
+        <GalleryImageSkeleton inCarousel={true} />
+      </div>
     </div>
 
     {/* Carousel Navigation Skeleton */}
@@ -48,7 +53,7 @@ const MobileCarouselSkeleton = () => (
       <div className="flex flex-wrap justify-center gap-2 px-4 w-full max-w-md">
         <div className="h-2 w-6 rounded-full bg-gray-400 dark:bg-gray-600 animate-pulse"></div>
         <div className="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-800 animate-pulse"></div>
-        <div className="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-800 animate-pulse"></div>
+        <div className="h-2 w-2 rounded-full bg-gray-300 dark:bg-gray-800 animate-pulse block sm:hidden"></div>
       </div>
 
       <div className="flex gap-4">
@@ -65,7 +70,7 @@ const MobileCarouselSkeleton = () => (
 
 // Desktop Grid Layout
 const DesktopGridSkeleton = ({ count = 8 }) => (
-  <div className="hidden md:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
+  <div className="hidden lg:flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-6 w-full">
     {Array.from({ length: count }).map((_, index) => (
       <GalleryImageSkeleton key={index} inCarousel={false} />
     ))}
