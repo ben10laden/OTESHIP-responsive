@@ -69,43 +69,43 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-white dark:bg-(--color-bg-dark) p-2.5 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 flex items-center drop-shadow-sm sticky top-0 z-10 transition-colors duration-200">
-      {/* Left Section */}
-      <div className="flex flex-col shrink-0 justify-start max-w-fit">
+    <nav className="bg-white dark:bg-(--color-bg-dark) p-2.5 px-4 xs:px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 flex items-center justify-between drop-shadow-sm sticky top-0 z-10 transition-colors duration-200">
+      {/* Left Section - Removed flex-1, added shrink-0 so it doesn't crush inwards */}
+      <div className="flex flex-col justify-start items-start shrink-0 ui-scale-safe">
         <Link to="/">
-          <div className="flex flex-row items-center pb-0 md:pb-1 lg:pb-1.5 xl:pb-2 space-x-0.5 sm:space-x-1 md:space-x-1.5 xl:space-x-2">
+          <div className="flex flex-row items-center pb-0 md:pb-1 lg:pb-1.5 xl:pb-2 space-x-0.5 xs:space-x-1 sm:space-x-1 md:space-x-1.5 xl:space-x-2">
             <img
               src="/logos/oteship.png"
               alt="OTEShip"
-              className="h-[0.75em] sm:h-[1em] md:h-[1.5em] lg:h-[1.75em] xl:h-[2em] w-auto inline-block"
+              className="h-[0.75em] sm:h-[1em] md:h-[1.5em] lg:h-[1.75em] xl:h-[2em] w-auto inline-block shrink-0"
             />
-            <h1 className="text-base sm:text-lg md:text-xl lg:text-[1.35rem] xl:text-2xl font-bold text-(--color-primary) dark:text-(--color-primary2)">
+            <h1 className="text-base xs:text-17px sm:text-lg md:text-xl lg:text-21px xl:text-2xl font-bold text-(--color-primary) dark:text-(--color-primary2) whitespace-nowrap">
               OTESHIP
             </h1>
           </div>
-          <div className="flex flex-row items-center space-x-0.5 sm:space-x-1 md:space-x-1.5 xl:space-x-2">
-            <span className="fi fi-eu h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em]"></span>
+          <div className="flex flex-row items-center space-x-0.5 xs:space-x-1 sm:space-x-1 md:space-x-1.5 xl:space-x-2">
+            <span className="fi fi-eu h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] shrink-0"></span>
             <img
               src="/logos/IKY.png"
               alt="IKY"
-              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block"
+              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block shrink-0"
             />
             <img
               src="/logos/eeeek.png"
               alt="EEEEK"
-              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block"
+              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block shrink-0"
             />
             <img
               src="/logos/poland.png"
               alt="SOSWDNR"
-              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block"
+              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block shrink-0"
             />
             <img
               src="/logos/turkey.png"
               alt="MÖEUO III K"
-              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block"
+              className="h-[0.65em] sm:h-[0.75em] md:h-[0.85em] lg:h-[0.9em] xl:h-[1em] w-auto inline-block shrink-0"
             />
-            <h2 className="text-[6px] sm:text-[8px] md:text-[10px] lg:text-[11px] xl:text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary)">
+            <h2 className="text-6px xs:text-7px sm:text-8px md:text-10px lg:text-11px xl:text-xs text-(--color-bg-dark) dark:text-(--color-bg-primary) whitespace-nowrap">
               Erasmus+
             </h2>
           </div>
@@ -113,7 +113,7 @@ export default function Navbar() {
       </div>
 
       {/* Center Section */}
-      <div className="hidden lg:flex justify-center flex-1 min-w-fit text-center xl:absolute xl:left-1/2 xl:-translate-x-1/2 text-sm lg:text-[15px] xl:text-base space-x-4 lg:space-x-8 xl:space-x-12 font-medium [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd] text-(--color-dark-text) dark:text-white">
+      <div className="ui-scale-safe hidden lg:flex shrink-0 justify-center items-center text-center text-sm xl:text-base space-x-4 lg:space-x-8 xl:space-x-10 font-medium [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd] text-(--color-dark-text) dark:text-white whitespace-nowrap">
         <Link to="/" className={`hover-anim ${isActive("/") ? "active" : ""}`}>
           {t("navbar.home")}
         </Link>
@@ -149,8 +149,8 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Right Section */}
-      <div className="flex flex-row justify-end items-center space-x-2 sm:space-x-2.5 md:space-x-2.5 lg:space-x-2.5 xl:space-x-2.5 flex-1 lg:flex-none xl:flex-1 max-w-none lg:max-w-fit xl:max-w-none">
+      {/* Right Section - Removed flex-1, added shrink-0 */}
+      <div className="flex flex-row justify-end items-center space-x-2 xs:space-x-2.5 sm:space-x-2.5 shrink-0 ui-scale-safe">
         {/* Desktop Theme & Language Container */}
         <div className="hidden lg:flex flex-row items-center space-x-2 sm:space-x-2.5">
           <ThemeToggle />
@@ -159,13 +159,13 @@ export default function Navbar() {
             <button
               aria-label="Toggle Language Dropdown"
               onClick={toggleLanguageDropdown}
-              className="flex w-12.5 sm:w-13.75 md:w-15 lg:w-17.5 xl:w-20 px-2 sm:px-2.5 md:px-2.5 lg:px-3 xl:px-3.5 py-1 lg:py-1.5 space-x-1 md:space-x-1.5 xl:space-x-2 bg-gray-100 dark:bg-(--color-dark2-text) border border-gray-300 dark:border-gray-500 rounded-md cursor-pointer flex-row justify-center items-center hover:bg-gray-200 dark:hover:bg-black/40 transition-all duration-200"
+              className="flex w-auto px-2 sm:px-3 lg:px-3.5 py-1 lg:py-1.5 space-x-1.5 md:space-x-2 bg-gray-100 dark:bg-(--color-dark2-text) border border-gray-300 dark:border-gray-500 rounded-md cursor-pointer flex-row justify-center items-center hover:bg-gray-200 dark:hover:bg-black/40 transition-all duration-200 whitespace-nowrap"
             >
-              <h1 className="font-light inline-block text-[10px] sm:text-[11px] md:text-xs lg:text-[13px] xl:text-sm uppercase tracking-wide dark:text-white">
+              <h1 className="font-light inline-block text-10px sm:text-11px md:text-xs lg:text-13px xl:text-sm uppercase tracking-wide dark:text-white">
                 {currentLanguage.code}
               </h1>
               <span
-                className={`fi fi-${currentLanguage.flag} text-[10px] sm:text-xs md:text-sm`}
+                className={`fi fi-${currentLanguage.flag} text-10px sm:text-xs md:text-sm`}
               ></span>
             </button>
 
@@ -215,7 +215,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Hamburger Button with invisible touch target */}
+        {/* Mobile Hamburger Button */}
         <div className="relative lg:hidden flex items-center justify-center w-10 h-10 shrink-0">
           <button
             ref={hamburgerButtonRef}
@@ -288,7 +288,7 @@ export default function Navbar() {
           </div>
 
           {/* Bottom: Nav Links */}
-          <div className="flex flex-col space-y-4 text-center text-[15px] font-medium text-(--color-dark-text) dark:text-white pb-2 [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd]">
+          <div className="flex flex-col space-y-4 text-center text-15px font-medium text-(--color-dark-text) dark:text-white pb-2 [--hover-color:#aeaeae] dark:[--hover-color:#aeaeaebd]">
             <Link
               to="/"
               onClick={() => setIsMobileMenuOpen(false)}

@@ -133,6 +133,26 @@ html {
   --text-scale: 1.5;
 }
 
+.font-size-large .ui-scale-safe {
+  --text-scale: 1.05 !important;
+  --text-xs: calc(0.75rem * 1.05) !important;
+  --text-sm: calc(0.875rem * 1.05) !important;
+  --text-base: calc(1rem * 1.05) !important;
+  --text-lg: calc(1.125rem * 1.05) !important;
+  --text-xl: calc(1.25rem * 1.05) !important;
+  --text-2xl: calc(1.5rem * 1.05) !important;
+}
+
+.font-size-xlarge .ui-scale-safe {
+  --text-scale: 1.15 !important;
+  --text-xs: calc(0.75rem * 1.15) !important;
+  --text-sm: calc(0.875rem * 1.15) !important;
+  --text-base: calc(1rem * 1.15) !important;
+  --text-lg: calc(1.125rem * 1.15) !important;
+  --text-xl: calc(1.25rem * 1.15) !important;
+  --text-2xl: calc(1.5rem * 1.15) !important;
+}
+
 /* ========================================= */
 
 /* High Contrast Mode */
