@@ -49,6 +49,7 @@
     "sending": "Wysyłanie...",
     "invalidFormat": "Proszę dostosować się do wymaganego formatu.",
     "invalidEmail": "Proszę wprowadzić poprawny adres e-mail (np. name@domain.com)",
-    "requiredField": "Proszę wypełnić to pole."
+    "requiredField": "Proszę wypełnić to pole.",
+    "rateLimitMessage": "Zbyt wiele żądań. Proszę poczekać 60 sekund."
   }
 }

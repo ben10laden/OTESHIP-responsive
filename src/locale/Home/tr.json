@@ -49,6 +49,7 @@
     "sending": "Gönderiliyor...",
     "invalidFormat": "Lütfen istenilen formata uyun.",
     "invalidEmail": "Lütfen geçerli bir e-posta adresi girin (örn. name@domain.com)",
-    "requiredField": "Lütfen bu alanı doldurun."
+    "requiredField": "Lütfen bu alanı doldurun.",
+    "rateLimitMessage": "Çok fazla istek. Lütfen 60 saniye bekleyin."
   }
 }

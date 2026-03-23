@@ -49,6 +49,7 @@
     "sending": "Sending...",
     "invalidFormat": "Please match the requested format.",
     "invalidEmail": "Please enter a valid email address (e.g., name@domain.com)",
-    "requiredField": "Please fill out this field."
+    "requiredField": "Please fill out this field.",
+    "rateLimitMessage": "Too many requests. Please wait 60 seconds."
   }
 }

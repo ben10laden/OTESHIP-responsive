@@ -8,6 +8,8 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState("success");
+  // New state to hold specific error messages (like rate limits)
+  const [customToastMessage, setCustomToastMessage] = useState(null);
 
   useEffect(() => {
     if (showToast) {
@@ -22,6 +24,7 @@ const ContactForm = () => {
     // Spam protection check
     if (e.target.elements.botcheck.value) {
       setToastType("success");
+      setCustomToastMessage(null);
       setShowToast(true);
       form.current.reset();
       return;
@@ -38,7 +41,7 @@ const ContactForm = () => {
 
     try {
       // 2. Send the data to your Hostinger PHP script
-      const response = await fetch("https://oteship.eu/send-email.php", {
+      const response = await fetch("/send-email.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,20 +52,40 @@ const ContactForm = () => {
 
       const result = await response.json();
 
-      // 3. Handle the server's response
+      // 3. Check specifically for our 429 Rate Limit status
+      if (response.status === 429) {
+        throw new Error("RATE_LIMIT");
+      }
+
+      // 4. Handle standard success or generic server errors
       if (result.status === "success") {
         setIsSubmitting(false);
         setToastType("success");
+        setCustomToastMessage(null); // Clears any custom message to use default success
         setShowToast(true);
         form.current.reset();
       } else {
-        throw new Error(result.message || "Server returned an error");
+        throw new Error(result.message || "SERVER_ERROR");
       }
     } catch (error) {
       setIsSubmitting(false);
       setToastType("error");
+
+      // If it's the rate limit, set the custom message. Otherwise, clear it for the default error.
+      if (error.message === "RATE_LIMIT") {
+        // Uses your translation file if available, otherwise falls back to the English string
+        setCustomToastMessage(
+          t(
+            "contact.rateLimitMessage",
+            "Too many requests. Please wait a minute.",
+          ),
+        );
+      } else {
+        setCustomToastMessage(null);
+        console.error("Fetch Error:", error);
+      }
+
       setShowToast(true);
-      console.error("Fetch Error:", error);
     }
   };
 
@@ -210,9 +233,12 @@ const ContactForm = () => {
               className={`fa-solid ${toastType === "success" ? "fa-circle-check text-green-500" : "fa-circle-xmark text-red-500"} text-xl`}
             ></i>
             <span className="text-sm md:text-base font-semibold">
-              {toastType === "success"
-                ? t("contact.successMessage")
-                : t("contact.errorMessage")}
+              {/* Dynamic Toast Text Logic */}
+              {customToastMessage
+                ? customToastMessage
+                : toastType === "success"
+                  ? t("contact.successMessage")
+                  : t("contact.errorMessage")}
             </span>
           </div>
           <button
