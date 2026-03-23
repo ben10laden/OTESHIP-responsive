@@ -141,11 +141,10 @@ const ContactForm = () => {
             name="user_email"
             type="email"
             required
-            pattern="^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
             onInvalid={(e) => {
               if (e.target.validity.valueMissing) {
                 e.target.setCustomValidity(t("contact.requiredField"));
-              } else {
+              } else if (e.target.validity.typeMismatch) {
                 e.target.setCustomValidity(
                   `${t("contact.invalidFormat")}\n${t("contact.invalidEmail")}`,
                 );
@@ -168,7 +167,6 @@ const ContactForm = () => {
             name="user_phone"
             type="tel"
             required
-            pattern="[0-9+\\-\\(\\)\\s]*"
             onInvalid={(e) =>
               e.target.setCustomValidity(t("contact.requiredField"))
             }
