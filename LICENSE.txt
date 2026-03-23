@@ -1,0 +1,7 @@
+Copyright (c) 2026 Dimitris Markou
+
+All rights reserved.
+
+The source code in this repository is provided strictly for portfolio and showcase purposes. 
+
+You may view the code on GitHub, but you may not use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the code, in whole or in part, without explicit written permission from the author.
